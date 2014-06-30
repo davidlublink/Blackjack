@@ -9,6 +9,10 @@ If you want to test a different counting system or basic strategy, simple implem
 
 Load up the player and run play.php
 
+The only result I really care about when running the script is whether or not the player goes bankrupt. If the player can play an infinit number of rounds without losing, the player probably has a good system. 
+
+If the player can't last more than a few hundred rounds, the player's strategy sucks.
+
 
 Known issues
 =========
