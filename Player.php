@@ -1,6 +1,6 @@
 <?php
 
-Class BlackJackPlayer implements BlackJackPlayerInterface/*{{{*/
+Class BlackJackPlayer implements BlackJackPlayerInterface
 {
      const BUST = 4;
      const LOSE = 4;
@@ -23,6 +23,8 @@ Class BlackJackPlayer implements BlackJackPlayerInterface/*{{{*/
           $bet = 15; 
 
           $count = $game->getCount(); 
+
+          if ( $count < -5 )  throw new exception("player left because count is too low!");
 
           if( $count > 0 ) 
                $bet += round( 5 * $game->getCount()); 
@@ -222,5 +224,5 @@ Class BlackJackPlayer implements BlackJackPlayerInterface/*{{{*/
           return true;
      }/*}}}*/
 
-}/*}}}*/
+}
 

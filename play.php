@@ -6,29 +6,23 @@ require_once('Player.php');
 $bj = new BlackJackGame();
 
 $player = new BlackJackPlayer( $start = 100 ); 
+$player = new BlackJackPlayer( $start = 100 ); 
 
-$hands = 0;
 $max = $start;
 
-$rounds = array_key_exists(1, $argv) ? $argv[1] : 1;
+$rounds = array_key_exists(1, $argv) ? $argv[1] : 10000;
 
 try
 {
      while ( $player->hasMoney( $bj ) && $rounds-- )
      {
-          if ( $bj->getCount() < -5 ) 
-          {
-               $bj = new BlackJackGame(); 
-               throw new exception("Count is too low!"); 
-               echo "Leave table!\n";
-          }
-
           $hands++; 
           $bj->deal( array( $player ) ); 
      }
 }
 catch(exception $e )
 {
+     echo "Exception : \n";
      echo $e->getMessage()."\n";
 }
 
