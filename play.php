@@ -31,7 +31,6 @@ try
      {
           foreach ( $players as $k => $player )
           {
-               var_dump($player->hasMoney($bj ) );
                if ( !$player->hasMoney( $bj ) )
                {
                     echo "Player $k is out of money, left the table\n";
