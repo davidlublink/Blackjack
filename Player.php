@@ -24,7 +24,11 @@ Class BlackJackPlayer implements BlackJackPlayerInterface
 
           $count = $game->getCount(); 
 
-          if ( $count < -5 )  throw new exception("player left because count is too low!");
+          $bet = max ( 5, $game->getCount() * 5 ); 
+          echo "I am betting $bet$\n"; 
+          return $bet ;
+
+#          if ( $count < -5 )  throw new exception("player left because count is too low!");
 
           if( $count > 0 ) 
                $bet += round( 5 * $game->getCount()); 
@@ -96,6 +100,12 @@ Class BlackJackPlayer implements BlackJackPlayerInterface
           while ( $i-- > 0  )
           {
                list( $soft, $value ) = $me->getValue(); 
+
+               if ( $value === 21 ) 
+               {
+                    echo "I have 21, nice...\n";
+                    return ;
+               }
 
                if ( $me->isSplitAllowed() ) 
                {
