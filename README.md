@@ -16,7 +16,6 @@ If the player can't last more than a few hundred rounds, the player's strategy s
 
 Known issues
 =========
-* I don't offer insurance
 
 Notes 
 =========
