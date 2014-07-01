@@ -40,7 +40,6 @@ Class BlackJackDeck
      {
           for ( $i = 0; $i < self::SHUFFLES; $i++ )
                shuffle( $this->deck ); 
-
      }/*}}}*/
 
      public function getValue( $card )/*{{{*/
@@ -85,7 +84,7 @@ Class BlackJackDeck
 
           if ( !$this->isCardAvailable() ) throw new exception("Out of cards!");
 
-          $card = array_pop( $this->deck );
+          $card = array_shift( $this->deck );
 
           $this->count += self::$countingSystem[ $card ] ;
 
