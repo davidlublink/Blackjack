@@ -16,8 +16,6 @@ If the player can't last more than a few hundred rounds, the player's strategy s
 
 Known issues
 =========
-* The player can't see other players cards, I need to update the PlayerInterface so that it is called each time a card is shown.
-* Card counting is done in BlackJackDeck and not by the player, this is wrong.
 
 
 Notes 
