@@ -3,9 +3,12 @@
 require_once('Game.php');
 require_once('Player.php');
 
+require_once( 'Players/HiLo.php' );
+
 $bj = new BlackJackGame();
 
-$player = new BlackJackPlayer( $start = 100 ); 
+// $player = new BlackJackPlayer( $start = 100 ); 
+$player = new BlackJackPlayer_HiLo( $start = 100 ); 
 
 $max = $start;
 
