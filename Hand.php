@@ -12,12 +12,18 @@ Class BlackJackHand
 
      private $split = null ;
 
-     public function __construct( $bet, $deck, $first )/*{{{*/
+     private $players ;
+
+     private $show = false;
+
+     public function __construct( $players, $bet, $deck, $first, $show = false )/*{{{*/
      {
+          $this->players = $players;
           if ( $bet !== null )
                $this->bet = $bet ;
           $this->deck = $deck ;
           $this->hidden = $first ;
+          $this->show = $show ;
      }/*}}}*/
 
      public function dealer( $amt )/*{{{*/
@@ -62,10 +68,28 @@ Class BlackJackHand
 
           if ( count($this->shown ) > 0 && !$hideHit) 
                echo "Hit...\n"; 
+
           $this->shown[] = $d = $this->deck->draw(); 
+          if ( $this->show )
+          {
+               foreach ( $this->players as $player )
+                    $player->revealcard( $d );
+          }
+
           if ( count($this->shown) > 1 )
                echo "Hand is now ". $this->hidden . " ". implode (' ', $this->shown )."\n";
           return $d; 
+     }/*}}}*/
+
+     public function revealcards()/*{{{*/
+     {
+          $this->show = true ;
+          foreach ( $this->players as $player )
+          {
+               $player->revealcard( $this->hidden );
+               foreach ( $this->shown as $card )
+                    $player->revealcard( $card );
+          }
      }/*}}}*/
 
      public function getShown() /*{{{*/
@@ -113,9 +137,9 @@ Class BlackJackHand
 
           echo "Splitting on ". implode(' ', $this->getCards() )."\n ";
 
-          $this->split = new BlackJackHand( New BlackJackBet( $this->bet->getGame(), $this->bet->getPlayer(), $this->bet->getBet() ),
+          $this->split = new BlackJackHand( $this->players, New BlackJackBet( $this->bet->getGame(), $this->bet->getPlayer(), $this->bet->getBet() ),
                     $this->deck,
-                    $this->shown[0] );
+                    $this->shown[0], true );
 
           $this->split->hit();
 

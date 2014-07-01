@@ -2,6 +2,8 @@
 
 interface BlackJackPlayerInterface
 {
+     public function revealcard ( $card ) ;
+
      public function getBet( BlackJackGame $game) ;
      public function pay( $amt );
      public function win( );

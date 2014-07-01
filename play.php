@@ -9,7 +9,8 @@ $player = new BlackJackPlayer( $start = 100 );
 
 $max = $start;
 
-$rounds = array_key_exists(1, $argv) ? $argv[1] : 10000;
+$rounds = array_key_exists(1, $argv) ? $argv[1] : 1;
+$hands = 0;
 
 try
 {

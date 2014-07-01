@@ -62,6 +62,11 @@ Class BlackJackDealer implements BlackJackPlayerInterface
      {
      }/*}}}*/
 
+     public function revealcard( $card )
+     {
+
+     }
+
 }/*}}}*/
 
 

@@ -226,5 +226,9 @@ Class BlackJackPlayer implements BlackJackPlayerInterface
           return true;
      }/*}}}*/
 
+     public function revealcard( $card )
+     {
+     }
+
 }
 
