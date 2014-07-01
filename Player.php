@@ -158,7 +158,7 @@ Class BlackJackPlayer implements BlackJackPlayerInterface
                          }
                     }
 
-                    if ( $value == 17 ) // A & 6 
+                    elseif ( $value == 17 ) // A & 6 
                     {
                          if ( in_array( $dealer, array( '2', '7', '8', '9', '10', 'A' ) ) ) $me->hit(); 
                          else if ( in_array( $dealer, array( '3', '4', '5', '6' ) ) )
@@ -167,7 +167,7 @@ Class BlackJackPlayer implements BlackJackPlayerInterface
                               $me->hit(); 
                          }
                     }
-                    if ( $value == 16 || $value === 15 ) // A & 5 , A & 6
+                    elseif ( $value == 16 || $value === 15 ) // A & 5 , A & 6
                     {
                          if ( in_array( $dealer, array( '3', '2', '7', '8', '9', '10', 'A' ) ) ) $me->hit(); 
                          else if ( in_array( $dealer, array( '4', '5', '6' ) ) )
@@ -177,7 +177,7 @@ Class BlackJackPlayer implements BlackJackPlayerInterface
                          }
                     }
 
-                    if ( $value == 14 || $value === 13 ) // A & 3 , A & 2
+                    elseif ( $value == 14 || $value === 13 ) // A & 3 , A & 2
                     {
                          if ( in_array( $dealer, array( '3', '2', '4', '7', '8', '9', '10', 'A' ) ) ) $me->hit(); 
                          else if ( in_array( $dealer, array( '5', '6' ) ) )
@@ -186,29 +186,31 @@ Class BlackJackPlayer implements BlackJackPlayerInterface
                               $me->hit(); 
                          }
                     }
+                    continue ;
                }
 
                if ( $value >= 17 ) return ;
 
-               if ( $value > 11 && $value <= 16 
+               elseif ( $value > 11 && $value <= 16 
                          && in_array( $dealer, array( '2', '3', '4', '5', '6' ) ) 
                   ) return ;
 
-               if ( $value === 12 && in_array( $dealer, array( '3', '2' ) ) ) $me->hit();
-
-               if ( $value === 11 && $dealer != 'A' && $me->isDoubleAllowed() ) 
+               elseif ( $value === 12 && in_array( $dealer, array( '3', '2' ) ) ) 
+                    $me->hit();
+               elseif ( $value === 11 && $dealer != 'A' && $me->isDoubleAllowed() ) 
                     return $card = $me->double(); 
-
-               if ( $value === 11 ) $me->hit(); 
-
-               if ( $value === 10 && !in_array($dealer,array( '10', 'A') ) ) return $me->double(); 
-
-               if ( $value === 9 && in_array( $dealer, array( '3', '4', '5', '6' ) ) ) return $me->double(); 
-
-               if ( in_array( $dealer, array('7','8','9','10','J','K','Q','A') ) && $value < 17 ) $me->hit();
-
-               if ( $value === 9 && $dealer === '2' ) $me->hit(); 
-               if ( $value <= 8 ) $me->hit(); 
+               elseif ( $value === 11 ) 
+                    $me->hit(); 
+               elseif ( $value === 10 && !in_array($dealer,array( '10', 'A') ) ) 
+                    return $me->double(); 
+               elseif ( $value === 9 && in_array( $dealer, array( '3', '4', '5', '6' ) ) ) 
+                    return $me->double(); 
+               elseif ( in_array( $dealer, array('7','8','9','10','J','K','Q','A') ) && $value < 17 ) 
+                    $me->hit();
+               elseif ( $value === 9 && $dealer === '2' ) 
+                    $me->hit(); 
+               elseif ( $value <= 8 ) 
+                    $me->hit(); 
           }
 
           die("What do I do ? $dealer <=> $value ");
