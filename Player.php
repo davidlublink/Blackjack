@@ -17,7 +17,7 @@ Class BlackJackPlayer implements BlackJackPlayerInterface
      
      public function pay( $amt ) { /*{{{*/
           $this->money += $amt ;
-          echo "I have {$this->money}$ left \n";
+          BlackJackLog::out( BlackJackLog::RESULTS, "I have {$this->money}$ left");
 
           $this->peak = max( $this->money, $this->peak );
      }/*}}}*/
@@ -34,27 +34,27 @@ Class BlackJackPlayer implements BlackJackPlayerInterface
 
      public function win( )/*{{{*/
      {
-          echo "Player won\n";
+          BlackJackLog::out( BlackJackLog::RESULTS, "Player won") ;
      }/*}}}*/
 
      public function blackjack( )/*{{{*/
      {
-          echo "Player got blackjack\n";
+          BlackJackLog::out( BlackJackLog::RESULTS, "Player got blackjack"); 
      }/*}}}*/
 
      public function lose( )/*{{{*/
      {
-          echo "Player loses \n";
+          BlackJackLog::out( BlackJackLog::RESULTS, "Player loses");
      }/*}}}*/
 
      public function bust( )/*{{{*/
      {
-          echo "I lost \n";
+          BlackJackLog::out( BlackJackLog::RESULTS, "I lost" ) ;
      }/*}}}*/
 
      public function push(  )/*{{{*/
      {
-          echo "Push \n";
+          BlackJackLog::out( BlackJackLog::RESULTS, "Push" );
      }/*}}}*/
 
      public function deal( BlackJackHand $dealerHand, array $others, BlackJackHand $me ) /*{{{*/
@@ -69,7 +69,7 @@ Class BlackJackPlayer implements BlackJackPlayerInterface
 
                if ( $value === 21 ) 
                {
-                    echo "I have 21, nice...\n";
+                    BlackJackLog::out( BlackJackLog::PLAY, "I have 21, nice..." );
                     return ;
                }
 
@@ -212,6 +212,12 @@ Class BlackJackPlayer implements BlackJackPlayerInterface
      public function shuffle()/*{{{*/
      {
      }/*}}}*/
+
+     public function wantInsurance( $game, $cost )/*{{{*/
+     {
+          return false ;
+     }/*}}}*/
+
 }
 
 

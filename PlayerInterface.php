@@ -27,4 +27,6 @@ interface BlackJackPlayerInterface
      // To stand, simply return null ;
      public function deal( BlackJackHand $dealer, array $others, BlackJackHand $me ); 
 
+     public function wantInsurance( $game, $cost ) ; 
+
 }

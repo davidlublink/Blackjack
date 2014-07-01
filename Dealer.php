@@ -8,7 +8,8 @@ Class BlackJackDealer implements BlackJackPlayerInterface
 
      public function deal( BlackJackHand $dealer, array $others, BlackJackHand $me )/*{{{*/
      {
-          echo "Dealer has : ". implode(' ', $dealer->getCards()) ."\n";
+          BlackJackLog::out( BlackJackLog::DEALER, "Dealer has : ". implode(' ', $dealer->getCards()) );
+
           while ( true )
           {
                list( $soft, $value ) = $dealer->getValue(); 
@@ -62,12 +63,17 @@ Class BlackJackDealer implements BlackJackPlayerInterface
      {
      }/*}}}*/
 
-     public function revealcard( $card )
+     public function revealcard( $card )/*{{{*/
      {
 
-     }
+     }/*}}}*/
 
      public function shuffle() {}
+
+     public function wantInsurance( $game, $cost )/*{{{*/
+     {
+          return false ;
+     }/*}}}*/
 
 }/*}}}*/
 

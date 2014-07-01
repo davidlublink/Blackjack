@@ -25,13 +25,11 @@ Class BlackJackPlayer_HiLoOpt1 extends BlackJackPlayer_HiLo
 
      public function revealcard( $card )/*{{{*/
      {
-          echo "Player : Counting $card {$this->count} \n";
           $this->count += self::$countingSystem[ $card ] ;
      }/*}}}*/
 
      public function shuffle()/*{{{*/
      {
-          echo "Resetting count because of shuffle!\n";
           $this->count = 0 ;
      }/*}}}*/
 

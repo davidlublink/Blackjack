@@ -1,5 +1,6 @@
 <?php
 
+require_once('Log.php' ); 
 require_once('Bust.php');
 require_once('GameOver.php');
 require_once('Deck.php');
@@ -30,25 +31,22 @@ Class BlackJackGame
 
      private $dealersCards = array();
 
-     public function getCardsRemaining()
+     public function getCardsRemaining()/*{{{*/
      {
           return $this->deck->getCardsRemaining(); 
-     }
+     }/*}}}*/
 
      public function deal( $players )/*{{{*/
      {
           if ( $this->deck->getCardsRemaining() < $this->MINCARDS ) 
           {
-               echo "Shuffle!";
+               BlackJackLog::out( BlackJackLog::DECK, "Shuffling!") ;
                $this->deck = new BlackJackDeck();
                foreach ($players as $player )
                     $player->shuffle() ;
           }
 
-          echo "========== ";
-          echo 'Round has started';
-
-          echo " ==========\n";
+          BlackJackLog::out( BlackJackLog::MAIN, "============". 'Round has started' ." ==========") ;
 
           $bets = array();
 
@@ -69,10 +67,14 @@ Class BlackJackGame
 
           $dealerHand->hit();
 
+          require_once('Insurance.php');
+          BlackJackInsurance::check( $this, $dealerHand, $players, $bets );
+
           if ( $dealerHand->isBlackJack() )
           {
                $dealerHand->revealcards(); 
-               echo "Dealer has blackjack!\n";
+               BlackJackLog::out( BlackJackLog::DEALER, "Dealer has blackjack!" );
+
                foreach ( $players as $k => $player )
                {
                     $hands[$k]->revealcards();
@@ -94,15 +96,14 @@ Class BlackJackGame
 
                try
                {
-                    echo "Player hand is ". implode(' ', $hands[$k]->getCards())." against dealer ". ($dealerHand->getShown())  ."\n";
+                    BlackJackLog::out( BlackJackLog::MAIN, "Player hand is ". implode(' ', $hands[$k]->getCards())." against dealer ". ($dealerHand->getShown()) );
                     $player->deal( $dealerHand, $hands, $hands[$k] ); 
-                    echo "Player stands!\n";
+                    BlackJackLog::out( BlackJackLog::MAIN, "Player stands!" );
                     $stands[$k] = $hands[$k]; 
                }
                catch( BlackJackBust $e )
                {
-                    echo "Player bust!\n";
-                    $player->bust();
+                    BlackJackLog::out( BlackJackLog::RESULTS, "Player bust!" );
                }
           }
 
@@ -116,7 +117,7 @@ Class BlackJackGame
                }
                catch( BlackJackBust $e )
                {
-                    echo "Dealer bust!\n";
+                    BlackJackLog::out( BlackJackLog::RESULTS, "Dealer Bust");
                     foreach ( $stands as $k => $hand )
                          $hand->dealerBust();
 
@@ -128,10 +129,7 @@ Class BlackJackGame
                     $hand->dealer( $value ); 
           }
 
-          echo "========== ";
-          echo 'Round has finished';
-
-          echo " ==========\n\n";
+          BlackJackLog::out( BlackJackLog::MAIN,  "========== " . 'Round has finished' . " ==========" ) ;
           
 
      }/*}}}*/

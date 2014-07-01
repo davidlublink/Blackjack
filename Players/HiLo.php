@@ -10,13 +10,13 @@ Class BlackJackPlayer_HiLo extends BlackJackPlayer
 
      public function getBet( BlackJackGame $game ) /*{{{*/
      {
-          if ( $this->count < -5 ) return 0 ;//  throw new exception("Player left the table because of bad count!");
+//          if ( $this->count < -5 ) return 0 ;//  throw new exception("Player left the table because of bad count!");
 
           $decks = $game->getCardsRemaining() / 54 ;
 
-          $bet = max ( 10, round ($this->count / $decks * 5  ) ); 
-          echo "I am betting $bet$\n";
+          $bet = max ( 5, 10 + $this->getTrueCount($game) * 5 ) ;
 
+          BlackJackLog::out( BlackJackLog::BET, "I am betting $bet" );
           return $bet ;
      }/*}}}*/
 
@@ -38,15 +38,22 @@ Class BlackJackPlayer_HiLo extends BlackJackPlayer
 
      public function revealcard( $card )/*{{{*/
      {
-          echo "Player : Counting $card {$this->count} \n";
           $this->count += self::$countingSystem[ $card ] ;
      }/*}}}*/
 
      public function shuffle()/*{{{*/
      {
-          echo "Resetting count because of shuffle!\n";
           $this->count = 0 ;
      }/*}}}*/
 
+     protected function getTrueCount($game)/*{{{*/
+     {
+          return $this->count / ( $game->getCardsRemaining() / 54 ) ;
+     }/*}}}*/
+
+     public function wantInsurance( $game, $cost )/*{{{*/
+     {
+          return $this->getTrueCount( $game ) > 1;
+     }/*}}}*/
 
 }

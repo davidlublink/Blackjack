@@ -67,7 +67,7 @@ Class BlackJackHand
           if ( $this->doubled ) return ;
 
           if ( count($this->shown ) > 0 && !$hideHit) 
-               echo "Hit...\n"; 
+               BlackJackLog::out( BlackJackLog::PLAY, "Hit..." );
 
           $this->shown[] = $d = $this->deck->draw(); 
           if ( $this->show )
@@ -77,7 +77,7 @@ Class BlackJackHand
           }
 
           if ( count($this->shown) > 1 )
-               echo array_pop($this->getValue(false)) .": Hand is now ". $this->hidden . " ". implode (' ', $this->shown )."\n";
+               BlackJackLog::out( BlackJackLog::PLAY, array_pop($this->getValue(false)) .": Hand is now ". $this->hidden . " ". implode (' ', $this->shown ) );
           return $d; 
      }/*}}}*/
 
@@ -135,7 +135,7 @@ Class BlackJackHand
      {
           if ( !$this->isSplitAllowed() ) throw new exception("You can't split now!");
 
-          echo "Splitting on ". implode(' ', $this->getCards() )."\n ";
+          BlackJackLog::out( BlackJackLog::PLAY, "Splitting on ". implode(' ', $this->getCards() ) );
 
           $this->split = new BlackJackHand( $this->players, New BlackJackBet( $this->bet->getGame(), $this->bet->getPlayer(), $this->bet->getBet() ),
                     $this->deck,
@@ -143,9 +143,9 @@ Class BlackJackHand
 
           $this->split->hit();
 
-          echo "============== Split hand ============\n";
+          BlackJackLog::out( BlackJackLog::PLAY, "============== Split hand ============"); 
           $this->bet->getPlayer()->deal( $dealer, $others, $this->split );
-          echo "============== Done Split ============\n";
+          BlackJackLog::out( BlackJackLog::PLAY, "============== Done Split ============");
 
           $this->shown = array(); 
 
@@ -156,7 +156,7 @@ Class BlackJackHand
 
      public function double()/*{{{*/
      {
-          echo "Player doubled his bet...\n";
+          BlackJackLog::out( BlackJackLog::PLAY, "Player doubled his bet...");
           $card = $this->hit(true);
           if ( count( $this->shown ) === 2 ) 
           {
@@ -173,7 +173,7 @@ Class BlackJackHand
           if ( count($this->shown) !== 1 ) return false; 
 
           if ( $this->bet->getBet() > $this->bet->getPlayer()->getMoney() )
-               echo "User wants to double, but can't because we don't have enough money!\n";
+               BlackJackLog::out( BlackJackLog::PLAY, "User wants to double, but can't because we don't have enough money!" );
           else
                return true ;
      } 
@@ -183,7 +183,7 @@ Class BlackJackHand
           if ( !(  count( $this->shown ) === 1 && $this->shown[0] === $this->hidden ) ) return false ;
 
           if ( $this->bet->getBet() > $this->bet->getPlayer()->getMoney() )
-               echo "User wants to split, but can't because we don't have enough money!\n";
+               BlackJackLog::out( BlackJackLog::PLAY, "User wants to split, but can't because we don't have enough money!" );
           else
                return true ;
 

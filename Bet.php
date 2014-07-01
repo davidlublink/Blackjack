@@ -82,7 +82,7 @@ Class BlackJackBet
           if ( $ratio === 2.5 ) $this->player->blackjack();
 
           $payout = $ratio * $this->bet ;
-          echo "Paying player $payout$ \n";
+          BlackJackLog::out( BlackJackLog::BET, "Paying player $payout$"); 
           $this->player->pay( round($payout) );
           $this->paid = true ;
      }/*}}}*/

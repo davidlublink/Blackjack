@@ -33,7 +33,7 @@ try
           {
                if ( !$player->hasMoney( $bj ) )
                {
-                    echo "Player $k is out of money, left the table\n";
+                    BlackJackLog::out( BlackJackLog::MAIN, "Player $k is out of money, left the table" );
 
                     $rounds[$k] = $hands;
                     unset($players[$k] );
@@ -44,15 +44,14 @@ try
 
           if ( count( $players ) === 0 ) throw new exception( "Everyone is bankrupt" );
 
-          echo count($players);
           $hands++; 
           $bj->deal( $players );
      }
 }
 catch(exception $e )
 {
-     echo "Exception : \n";
-     echo $e->getMessage()."\n";
+     BlackJackLog::out( BlackJackLog::MAIN, "Exception : " ); 
+     BlackJackLog::out( BlackJackLog::MAIN, $e->getMessage() ); 
 }
 
 foreach ( $origPlayers as $k => $player )
@@ -62,9 +61,9 @@ foreach ( $origPlayers as $k => $player )
      $hands = $rounds[$k];
 
      if ( $gain > 0 )
-          echo get_class($player).": Player walked away with {$player->getMoney()}, that's a gain of {$gain} but peaked at {$player->getPeak()} with $hands played \n" ;
+          BlackJackLog::out( BlackJackLog::MAIN, get_class($player)." : Player walked away with {$player->getMoney()}, that's a gain of {$gain} but peaked at {$player->getPeak()} with $hands played") ;
      else
-          echo get_class($player)." : Player walked away with {$player->getMoney()}, that's a loss of ".abs($gain)." but peaked at {$player->getPeak()} with $hands played \n" ;
+          BlackJackLog::out( BlackJackLog::MAIN, get_class($player)." : Player walked away with {$player->getMoney()}, that's a loss of ".abs($gain)." but peaked at {$player->getPeak()} with $hands played") ;
 }
 
 
