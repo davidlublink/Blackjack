@@ -39,32 +39,27 @@ Class BlackJackPlayer implements BlackJackPlayerInterface
 
      public function win( )/*{{{*/
      {
-          $this->nextBet = max( $this->nextBet + self::WIN, 0 );
           echo "Player won\n";
      }/*}}}*/
 
      public function blackjack( )/*{{{*/
      {
-          $this->nextBet = max( $this->nextBet + self::BLACKJACK, 0 );
           echo "Player got blackjack\n";
      }/*}}}*/
 
      public function lose( )/*{{{*/
      {
-          $this->nextBet += self::LOSE ;
           echo "Player loses \n";
      }/*}}}*/
 
      public function bust( )/*{{{*/
      {
-          $this->nextBet += self::BUST ;
           echo "I lost \n";
      }/*}}}*/
 
      public function push(  )/*{{{*/
      {
           echo "Push \n";
-          $this->nextBet += self::PUSH;
      }/*}}}*/
 
      public function deal( BlackJackHand $dealerHand, array $others, BlackJackHand $me ) /*{{{*/
