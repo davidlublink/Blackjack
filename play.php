@@ -9,7 +9,11 @@ $bj = new BlackJackGame();
 
 #$player = new BlackJackPlayer( $start = 100 ); 
 #require_once( 'Players/HiLo.php' );$player = new BlackJackPlayer_HiLo( $start );
-require_once( 'Players/HiLoOpt1.php' );$player = new BlackJackPlayer_HiLoOpt1( $start );
+#require_once( 'Players/HiLoOpt1.php' );$player = new BlackJackPlayer_HiLoOpt1( $start );
+#require_once( 'Players/HiLoOpt2.php' );$player = new BlackJackPlayer_HiLoOpt2( $start );
+#require_once( 'Players/OmegaII.php' );$player = new BlackJackPlayer_OmegaII( $start );
+#require_once( 'Players/Red7.php' );$player = new BlackJackPlayer_Red7( $start );
+require_once( 'Players/ZenCount.php' );$player = new BlackJackPlayer_ZenCount( $start );
 
 $max = $start;
 
