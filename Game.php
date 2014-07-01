@@ -2,7 +2,7 @@
 
 require_once('Bust.php');
 require_once('GameOver.php');
-require_once('JackDeck.php');
+require_once('Deck.php');
 require_once('Bet.php');
 require_once('Hand.php');
 require_once('Dealer.php');
