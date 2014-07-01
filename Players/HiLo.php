@@ -6,17 +6,19 @@ require_once( 'Player.php' );
 Class BlackJackPlayer_HiLo extends BlackJackPlayer
 {
 
+     protected $count = 0 ;
+
      public function getBet( BlackJackGame $game ) /*{{{*/
      {
-          if ( $this->count < -5 ) throw new exception("Player left the table because of bad count!");
+          if ( $this->count < -5 ) return 0 ;//  throw new exception("Player left the table because of bad count!");
 
-          $bet = max ( 10, round ($this->count / 8 * 5  ) ); 
+          $decks = $game->getCardsRemaining() / 54 ;
+
+          $bet = max ( 10, round ($this->count / $decks * 5  ) ); 
           echo "I am betting $bet$\n";
 
           return $bet ;
      }/*}}}*/
-
-     private $count = 0 ;
 
      private static $countingSystem = array(/*{{{*/
                'A' => -1 ,

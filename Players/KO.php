@@ -1,23 +1,10 @@
 <?php
 
-require_once( 'Player.php' );
-
+require_once( 'HiLo.php' );
 
 # Source : http://en.wikipedia.org/wiki/Card_counting#Systems
-Class BlackJackPlayer_KO extends BlackJackPlayer
+Class BlackJackPlayer_KO extends BlackJackPlayer_HiLo
 {
-
-     public function getBet( BlackJackGame $game ) /*{{{*/
-     {
-          if ( $this->count < -5 ) throw new exception("Player left the table because of bad count!");
-
-          $bet = max ( 10, round ($this->count / 8 * 5  ) ); 
-          echo "I am betting $bet$\n";
-
-          return $bet ;
-     }/*}}}*/
-
-     private $count = 0 ;
 
      private static $countingSystem = array(/*{{{*/
                '2' => 1 ,

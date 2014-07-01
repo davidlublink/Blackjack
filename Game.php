@@ -30,6 +30,11 @@ Class BlackJackGame
 
      private $dealersCards = array();
 
+     public function getCardsRemaining()
+     {
+          return $this->deck->getCardsRemaining(); 
+     }
+
      public function deal( $players )/*{{{*/
      {
           if ( $this->deck->getCardsRemaining() < $this->MINCARDS ) 
