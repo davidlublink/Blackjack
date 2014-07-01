@@ -2,16 +2,8 @@
 
 Class BlackJackPlayer implements BlackJackPlayerInterface
 {
-     const BUST = 4;
-     const LOSE = 4;
-     const WIN  = -5;
-     const BLACKJACK = -5;
-     const PUSH = -1;
-
      private $money = 0 ; 
      private $peak = 0; 
-
-     private $nextBet = 0;
 
      public function __construct( $startingAmount = 20 )/*{{{*/
      {
@@ -22,7 +14,7 @@ Class BlackJackPlayer implements BlackJackPlayerInterface
      {
           if ( $this->count < -5 ) throw new exception("Player left the table because of bad count!");
 
-          $bet = max ( 5, $this->count * 5 ); 
+          $bet = max ( 10, round ($this->count / 8 * 5  ) ); 
           echo "I am betting $bet$\n"; 
 
           return $bet ;
@@ -247,10 +239,10 @@ Class BlackJackPlayer implements BlackJackPlayerInterface
           $this->count += self::$countingSystem[ $card ] ;
      }/*}}}*/
 
-     public function shuffle()
+     public function shuffle()/*{{{*/
      {
           echo "Resetting count because of shuffle!\n";
           $this->count = 0 ;
-     }
+     }/*}}}*/
 }
 
