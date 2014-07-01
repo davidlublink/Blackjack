@@ -33,4 +33,3 @@ if ( $gain > 0 )
 else
      echo "Player walked away with {$player->getMoney()}, that's a loss of ".abs($gain)." but peaked at {$player->getPeak()} with $hands played \n" ;
 
-

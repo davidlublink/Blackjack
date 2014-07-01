@@ -30,15 +30,14 @@ Class BlackJackGame
 
      private $dealersCards = array();
 
-     public function getCount() { return $this->deck->getCount();  }
-     public function getTrueCount() { return $this->deck->getTrueCount();  }
-
      public function deal( $players )/*{{{*/
      {
           if ( $this->deck->getCardsRemaining() < $this->MINCARDS ) 
           {
                echo "Shuffle!";
                $this->deck = new BlackJackDeck();
+               foreach ($players as $player )
+                    $player->shuffle() ;
           }
 
           echo "========== ";

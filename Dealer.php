@@ -67,6 +67,8 @@ Class BlackJackDealer implements BlackJackPlayerInterface
 
      }
 
+     public function shuffle() {}
+
 }/*}}}*/
 
 

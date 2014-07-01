@@ -10,24 +10,6 @@ Class BlackJackDeck
 
      private $decks = 8;
 
-     private $count = 0;
-
-     private static $countingSystem = array(/*{{{*/
-                'A' => -1 ,
-                '2' => 1 ,
-                '3' => 1 ,
-                '4' => 1 ,
-                '5' => 1 ,
-                '6' => 1 ,
-                '7' => 0,
-                '8' => 0,
-                '9' => 0,
-                '10' => -1 ,
-                'J' => -1 ,
-                'Q' => -1 ,
-                'K' => -1 ,
-               );/*}}}*/
-
 	public function __construct()/*{{{*/
 	{
           for ( $i = 0; $i < $this->decks * 4; $i++ )
@@ -51,21 +33,6 @@ Class BlackJackDeck
           return $card; 
      }/*}}}*/
 
-     public function getCount()/*{{{*/
-     {
-          return $this->count ;
-     }/*}}}*/
-
-     public function getTrueCount()/*{{{*/
-     {
-          return round ( $this->count / count($this->deck ) / 54,1 ) ;
-     }/*}}}*/
-
-     public function getRealCount()/*{{{*/
-     {
-          return $this->count / $this->decks ;
-     }/*}}}*/
-
      public function isCardAvailable()/*{{{*/
      {
           return count($this->deck) > 0 ;
@@ -76,17 +43,11 @@ Class BlackJackDeck
           return count($this->deck) ;
      }/*}}}*/
 
-     private $stacked = array ( );
-
      public function draw()/*{{{*/
      {
-          if ( count($this->stacked ) ) return array_shift( $this->stacked );
-
           if ( !$this->isCardAvailable() ) throw new exception("Out of cards!");
 
           $card = array_shift( $this->deck );
-
-          $this->count += self::$countingSystem[ $card ] ;
 
           echo "Drew card $card\n";
 

@@ -18,27 +18,11 @@ Class BlackJackPlayer implements BlackJackPlayerInterface
           $this->money = $startingAmount; 
      }/*}}}*/
 
-     public function getBet( BlackJackGame $game ) { /*{{{*/
+     public function getBet( BlackJackGame $game ) /*{{{*/
+     {
+          if ( $this->count < -5 ) throw new exception("Player left the table because of bad count!");
 
-          $bet = 15; 
-
-          $count = $game->getCount(); 
-
-          $bet = max ( 5, $game->getCount() * 5 ); 
-          echo "I am betting $bet$\n"; 
-          return $bet ;
-
-#          if ( $count < -5 )  throw new exception("player left because count is too low!");
-
-          if( $count > 0 ) 
-               $bet += round( 5 * $game->getCount()); 
-          else
-               $bet += round( 3 * $game->getCount()); 
-
-//          $bet += $this->nextBet ;
-
-          $bet = max( $game->getMinBet(), min( $game->getMaxBet(), $bet ) ); 
-
+          $bet = max ( 5, $this->count * 5 ); 
           echo "I am betting $bet$\n"; 
 
           return $bet ;
@@ -239,9 +223,34 @@ Class BlackJackPlayer implements BlackJackPlayerInterface
           return true;
      }/*}}}*/
 
-     public function revealcard( $card )
-     {
-     }
+     private $count = 0 ;
 
+     private static $countingSystem = array(/*{{{*/
+                'A' => -1 ,
+                '2' => 1 ,
+                '3' => 1 ,
+                '4' => 1 ,
+                '5' => 1 ,
+                '6' => 1 ,
+                '7' => 0,
+                '8' => 0,
+                '9' => 0,
+                '10' => -1 ,
+                'J' => -1 ,
+                'Q' => -1 ,
+                'K' => -1 ,
+               );/*}}}*/
+
+     public function revealcard( $card )/*{{{*/
+     {
+          echo "Player : Counting $card {$this->count} \n";
+          $this->count += self::$countingSystem[ $card ] ;
+     }/*}}}*/
+
+     public function shuffle()
+     {
+          echo "Resetting count because of shuffle!\n";
+          $this->count = 0 ;
+     }
 }
 

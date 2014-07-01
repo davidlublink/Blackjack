@@ -77,7 +77,7 @@ Class BlackJackHand
           }
 
           if ( count($this->shown) > 1 )
-               echo "Hand is now ". $this->hidden . " ". implode (' ', $this->shown )."\n";
+               echo array_pop($this->getValue(false)) .": Hand is now ". $this->hidden . " ". implode (' ', $this->shown )."\n";
           return $d; 
      }/*}}}*/
 
