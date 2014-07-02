@@ -57,6 +57,8 @@ Class BlackJackPlayer implements BlackJackPlayerInterface
           BlackJackLog::out( BlackJackLog::RESULTS, "Push" );
      }/*}}}*/
 
+     public function leaveGame() { return false; } 
+
      public function deal( BlackJackHand $dealerHand, array $others, BlackJackHand $me ) /*{{{*/
      {
           $dealer = $dealerHand->getShown();

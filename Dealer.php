@@ -39,6 +39,8 @@ Class BlackJackDealer implements BlackJackPlayerInterface
      { 
      }/*}}}*/
 
+     public function leaveGame() {return false;} 
+
      public function win( )/*{{{*/
      {
      }/*}}}*/

@@ -20,6 +20,8 @@ interface BlackJackPlayerInterface
      // Indicate the player has lost the most recent hand
      public function lose( );
 
+     public function leaveGame( );
+
      // Indicate the player has pushed on the most recent hand
      public function push( );
 

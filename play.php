@@ -1,14 +1,15 @@
+#!/usr/bin/php
 <?php
 
 require_once('Game.php');
 require_once('Player.php');
 
-$start = 100;
+$start = 10000;
 
 $bj = new BlackJackGame();
 
 $players = array(); 
-$players[] = new BlackJackPlayer( $start = 100 ); 
+$players[] = new BlackJackPlayer( $start ); 
 
 require_once( 'Players/HiLoOpt1.php' ); $players[] = new BlackJackPlayer_HiLoOpt1( $start );
 require_once( 'Players/HiLoOpt2.php' ); $players[] = new BlackJackPlayer_HiLoOpt2( $start );
@@ -30,6 +31,7 @@ try
 {
      while ( $roundsRemaining-- > 0 && count($players) )
      {
+          $thisRound = array(); 
           foreach ( $players as $k => $player )
           {
                if ( !$player->hasMoney( $bj ) )
@@ -39,14 +41,20 @@ try
                     $rounds[$k] = $hands;
                     unset($players[$k] );
                }
+               elseif ( !$player->leaveGame() )
+               {
+                    //BlackJackLog::out( BlackJackLog::MAIN, "Player $k is leaving because of a low count."); 
+                    $thisRound[] = $player ;
+               }
                else
                     $rounds[$k] = $hands ;
           }
 
-          if ( count( $players ) === 0 ) throw new exception( "Everyone is bankrupt" );
+          if ( count( $players ) === 0 ) throw new exception("Everyone is bankrupt!"); 
+          if ( count( $thisRound ) === 0 ) throw new exception( "Everyone is sitting out.") ;
 
           $hands++; 
-          $bj->deal( $players );
+          $bj->deal( $thisRound );
      }
 }
 catch(exception $e )
