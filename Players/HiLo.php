@@ -58,7 +58,7 @@ Class BlackJackPlayer_HiLo extends BlackJackPlayer
 
      public function leaveGame()
      {
-          return $this->count < -4 ;
+          return $this->count < -5; 
      }
 
 }

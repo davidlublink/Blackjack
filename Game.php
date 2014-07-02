@@ -46,7 +46,7 @@ Class BlackJackGame
                     $player->shuffle() ;
           }
 
-          BlackJackLog::out( BlackJackLog::MAIN, "============". 'Round has started' ." ==========") ;
+          BlackJackLog::out( BlackJackLog::ROUND, "============". 'Round has started' ." ==========") ;
 
           $bets = array();
 
@@ -96,14 +96,14 @@ Class BlackJackGame
 
                try
                {
-                    BlackJackLog::out( BlackJackLog::MAIN, "Player hand is ". implode(' ', $hands[$k]->getCards())." against dealer ". ($dealerHand->getShown()) );
+                    BlackJackLog::out( BlackJackLog::ROUND, "Player hand is ". implode(' ', $hands[$k]->getCards())." against dealer ". ($dealerHand->getShown()) );
                     $player->deal( $dealerHand, $hands, $hands[$k] ); 
-                    BlackJackLog::out( BlackJackLog::MAIN, "Player stands!" );
+                    BlackJackLog::out( BlackJackLog::ROUND, "Player stands!" );
                     $stands[$k] = $hands[$k]; 
                }
                catch( BlackJackBust $e )
                {
-                    BlackJackLog::out( BlackJackLog::RESULTS, "Player bust!" );
+                    BlackJackLog::out( BlackJackLog::ROUND, "Player bust!" );
                }
           }
 
@@ -117,7 +117,7 @@ Class BlackJackGame
                }
                catch( BlackJackBust $e )
                {
-                    BlackJackLog::out( BlackJackLog::RESULTS, "Dealer Bust");
+                    BlackJackLog::out( BlackJackLog::ROUND, "Dealer Bust");
                     foreach ( $stands as $k => $hand )
                          $hand->dealerBust();
 
@@ -129,7 +129,7 @@ Class BlackJackGame
                     $hand->dealer( $value ); 
           }
 
-          BlackJackLog::out( BlackJackLog::MAIN,  "========== " . 'Round has finished' . " ==========" ) ;
+          BlackJackLog::out( BlackJackLog::ROUND,  "========== " . 'Round has finished' . " ==========" ) ;
           
 
      }/*}}}*/

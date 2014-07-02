@@ -17,7 +17,7 @@ Class BlackJackPlayer implements BlackJackPlayerInterface
      
      public function pay( $amt ) { /*{{{*/
           $this->money += $amt ;
-          BlackJackLog::out( BlackJackLog::RESULTS, "I have {$this->money}$ left");
+          BlackJackLog::out( BlackJackLog::ROUND, "I have {$this->money}$ left");
 
           $this->peak = max( $this->money, $this->peak );
      }/*}}}*/
@@ -34,27 +34,27 @@ Class BlackJackPlayer implements BlackJackPlayerInterface
 
      public function win( )/*{{{*/
      {
-          BlackJackLog::out( BlackJackLog::RESULTS, "Player won") ;
+          BlackJackLog::out( BlackJackLog::ROUND, "Player won") ;
      }/*}}}*/
 
      public function blackjack( )/*{{{*/
      {
-          BlackJackLog::out( BlackJackLog::RESULTS, "Player got blackjack"); 
+          BlackJackLog::out( BlackJackLog::ROUND, "Player got blackjack"); 
      }/*}}}*/
 
      public function lose( )/*{{{*/
      {
-          BlackJackLog::out( BlackJackLog::RESULTS, "Player loses");
+          BlackJackLog::out( BlackJackLog::ROUND, "Player loses");
      }/*}}}*/
 
      public function bust( )/*{{{*/
      {
-          BlackJackLog::out( BlackJackLog::RESULTS, "I lost" ) ;
+          BlackJackLog::out( BlackJackLog::ROUND, "I lost" ) ;
      }/*}}}*/
 
      public function push(  )/*{{{*/
      {
-          BlackJackLog::out( BlackJackLog::RESULTS, "Push" );
+          BlackJackLog::out( BlackJackLog::ROUND, "Push" );
      }/*}}}*/
 
      public function leaveGame() { return false; } 
@@ -138,7 +138,7 @@ Class BlackJackPlayer implements BlackJackPlayerInterface
                     if ( $value == 19 )
                     {
                          if ( in_array( $dealer, array( '6' ) ) )
-                              $me->double();
+                              $me->doubleOrStand();
                          else
                               return ; 
                     }
@@ -151,7 +151,7 @@ Class BlackJackPlayer implements BlackJackPlayerInterface
                          else if ( in_array( $dealer, array( '9', '10','J','Q','K' ) ) ) $me->hit();
 
                          else if ( in_array( $dealer, array( '3', '4', '5', '6' ) ) )
-                              $me->double();
+                              $me->doubleOrStand();
                          else
                               return ; 
                     }

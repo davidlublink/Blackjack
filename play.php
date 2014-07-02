@@ -4,7 +4,7 @@
 require_once('Game.php');
 require_once('Player.php');
 
-$start = 10000;
+$start = 100;
 
 $bj = new BlackJackGame();
 
@@ -14,6 +14,7 @@ $players[] = new BlackJackPlayer( $start );
 require_once( 'Players/HiLoOpt1.php' ); $players[] = new BlackJackPlayer_HiLoOpt1( $start );
 require_once( 'Players/HiLoOpt2.php' ); $players[] = new BlackJackPlayer_HiLoOpt2( $start );
 require_once( 'Players/HiLo.php' );     $players[] = new BlackJackPlayer_HiLo( $start );
+require_once( 'Players/HiLoCount.php' );     $players[] = new BlackJackPlayer_HiLoCount( $start );
 require_once( 'Players/OmegaII.php' );  $players[] = new BlackJackPlayer_OmegaII( $start );
 require_once( 'Players/Red7.php' );     $players[] = new BlackJackPlayer_Red7( $start );
 require_once( 'Players/Tek.php' );      $players[] = new BlackJackPlayer_Tek( $start );
@@ -45,9 +46,9 @@ try
                {
                     //BlackJackLog::out( BlackJackLog::MAIN, "Player $k is leaving because of a low count."); 
                     $thisRound[] = $player ;
+                    if ( !array_key_exists( $k, $rounds) ) $rounds[$k] = 0 ;
+                    $rounds[$k]++;
                }
-               else
-                    $rounds[$k] = $hands ;
           }
 
           if ( count( $players ) === 0 ) throw new exception("Everyone is bankrupt!"); 
