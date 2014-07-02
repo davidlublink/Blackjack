@@ -19,6 +19,7 @@ require_once( 'Players/OmegaII.php' );  $players[] = new BlackJackPlayer_OmegaII
 require_once( 'Players/Red7.php' );     $players[] = new BlackJackPlayer_Red7( $start );
 require_once( 'Players/Tek.php' );      $players[] = new BlackJackPlayer_Tek( $start );
 require_once( 'Players/ZenCount.php' ); $players[] = new BlackJackPlayer_ZenCount( $start );
+require_once( 'Players/Martingale.php' ); $players[] = new BlackJackPlayer_Martingale( $start );
 
 $max = $start;
 
