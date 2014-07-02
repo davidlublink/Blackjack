@@ -79,16 +79,119 @@ Class BlackJackPlayer_HiLo extends BlackJackPlayer
                     return ;
                }
 
-               // Illustrious 2
+               // Illustrious 3
                if ( $count >= 4 && $value === 15 && in_array( $dealer, array('10', 'J', 'Q', 'K', 'A' ) ) )
                {
                     return ;
                }
 
-               // Illustrious 3
-               if ( $count >= 5 && $value === 20 && $this->isSplitAllowed() && in_array( $dealer, array('5') ) )
+               // Illustrious 4
+               if ( $count >= 5 && $value === 20 && $me->isSplitAllowed() && in_array( $dealer, array('5') ) )
                {
-                    
+                    $me->split($dealer, $others); 
+                    return ;
+               }
+
+               // Illustrious 5
+               if ( $count >= 4 && $value === 20 && $me->isSplitAllowed() && in_array( $dealer, array('6') ) )
+               {
+                    $me->double();
+                    return ;
+               }
+
+               // Illustrious 6
+               if ( $count >= 4 && $value === 10 && $me->isDoubleAllowed() && in_array( $dealer, array('10') ) )
+               {
+                    $me->double();
+                    return ;
+               }
+
+               // Illustrious 7
+               if ( $count >= 2 && $value === 12 && in_array( $dealer, array('3') ) )
+               {
+                    return ;
+               }
+
+               // Illustrious 8
+               if ( $count >= 3 && $value === 12 && in_array( $dealer, array('2') ) )
+               {
+                    return ;
+               }
+
+               // Illustrious 9
+               if ( $count >= 1 && $value === 11 && in_array( $dealer, array('A') ) )
+               {
+                    return ;
+               }
+
+               // Illustrious 10
+               if ( $count >= 1 && $value === 9 && in_array( $dealer, array('2') ) )
+               {
+                    return ;
+               }
+
+               // Illustrious 11
+               if ( $count >= 4 && $value === 10 && in_array( $dealer, array('A') ) )
+               {
+                    $me->double();
+                    return ;
+               }
+
+               // Illustrious 12
+               if ( $count >= 3 && $value === 9 && in_array( $dealer, array('7') ) )
+               {
+                    $me->double();
+                    return ;
+               }
+
+               // Illustrious 13
+               if ( $count >= 5 && $value === 16 && in_array( $dealer, array('9') ) )
+               {
+                    return ;
+               }
+
+               // Illustrious 14
+               if ( $count >= -1 && $value === 13 && in_array( $dealer, array('2') ) )
+               {
+                    return ;
+               }
+
+               // Illustrious 15
+               if ( $count >= 0 && $value === 12 && in_array( $dealer, array('4') ) )
+               {
+                    return ;
+               }
+
+               // Illustrious 16
+               if ( $count >= -2 && $value === 12 && in_array( $dealer, array('5') ) )
+               {
+                    return ;
+               }
+               elseif ( $value === 12 && in_array( $dealer, array('5') ) )
+               {
+                    $me->hit();
+                    return ;
+               }
+
+               // Illustrious 17
+               if ( $count >= -1 && $value === 12 && in_array( $dealer, array('6') ) )
+               {
+                    return ;
+               }
+               elseif ( $value === 12 && in_array( $dealer, array('6') ) )
+               {
+                    $me->hit();
+                    return ;
+               }
+
+               // Illustrious 18
+               if ( $count >= -2 && $value === 13 && in_array( $dealer, array('3') ) )
+               {
+                    return ;
+               }
+               elseif ( $value === 13 && in_array( $dealer, array('3') ) )
+               {
+                    $me->hit();
                     return ;
                }
 
