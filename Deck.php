@@ -2,13 +2,18 @@
 
 Class BlackJackDeck
 {
-     private static $sdeck = array( 'A','2','3','4','5','6','7','8','9','10','J','Q','K' );
+     private static $sdeck = array( '2','3','4','5','6','7','8','9','10','J','Q','K','A' );
 
      const SHUFFLES  = 3  ; 
 
 	private $deck = array();
 
      private $decks = 8;
+
+     public static function getBase()/*{{{*/
+     {
+          return self::$sdeck ;
+     }/*}}}*/
 
 	public function __construct()/*{{{*/
 	{

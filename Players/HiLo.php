@@ -14,7 +14,7 @@ Class BlackJackPlayer_HiLo extends BlackJackPlayer
 
           $decks = $game->getCardsRemaining() / 54 ;
 
-          $bet = max ( 5, 10 + $this->getTrueCount($game) * 5 ) ;
+          $bet = max ( 5, round( 10 + $this->getTrueCount($game) * 5 ) ) ;
 
           BlackJackLog::out( BlackJackLog::BET, "I am betting $bet" );
           return $bet ;
