@@ -23,11 +23,15 @@ class FakeBlackJackHand extends BlackJackHand
 
      private $decision = null;
      public function split( ) {
-          if ( $this->decision === null ) $this->decision = 'Split';
+          if ( $this->decision === null ) $this->decision = 'P';
      }
-     public function double() 
+     public function doubleOrStand( )
      {
-          if ( $this->decision === null ) $this->decision = 'Double';
+          if ( $this->decision === null ) $this->decision = 'Ds' ;
+     }
+     public function double( $hit = true) 
+     {
+          if ( $this->decision === null ) $this->decision = 'Dh' ;
      }
      public function getShown() 
      {
@@ -44,7 +48,7 @@ class FakeBlackJackHand extends BlackJackHand
 
      public function hit( )
      {
-          if ( $this->decision === null ) $this->decision = 'Hit';
+          if ( $this->decision === null ) $this->decision = 'H';
      }
 
      public function getResult()

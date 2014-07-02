@@ -12,17 +12,18 @@ echo '<style>';
 echo "\n";
 echo <<<CSS
 
-.Stand  { background-color : red; }
-.Split  { background-color : blue; }
-.Hit    { background-color : yellow ; }
-.Double { background-color : green ; }
+.S, .Stand  { background-color : yellow; }
+.P, .Split  { background-color : #00ff00; }
+.H, .Hit    { background-color : red ; }
+.Dh, .Double { background-color : blue ; }
 
+body { font-family: "Tahoma",sans-serif ; } 
 
 CSS;
 echo "\n";
 echo '</style>';
 
-echo '<table>';
+echo '<table cellspacing="0" cellpadding="5">';
 
 
 echo '<tr>';
@@ -42,14 +43,14 @@ for ( $i = 2; $i <= 20; $i++ )
           $dealer = new FakeBlackJackHand( $base );
           $player->deal( $dealer, array(), $hand ); 
           $result = $hand->getResult();
-          if ( $result === null ) $result = 'Stand';
+          if ( $result === null ) $result = 'S';
 
-          echo  "<td class='".$result."'> $base/$i =>".$result.'</td>';
+          echo  "<td class='".$result."'>".$result.'</td>';
      }
      echo '</tr>';
 }
 
-for ( $i = 20; $i >= 13; $i-- )
+for ( $i = 13; $i <= 20; $i++ )
 {
      echo '<tr>';
      echo '<th>A - '.( $i- 11) .'</th>';
@@ -61,14 +62,14 @@ for ( $i = 20; $i >= 13; $i-- )
           $dealer = new FakeBlackJackHand( $base );
           $player->deal( $dealer, array(), $hand ); 
           $result = $hand->getResult();
-          if ( $result === null ) $result = 'Stand';
+          if ( $result === null ) $result = 'S';
 
-          echo  "<td class='".$result."'> $base/$i =>".$result.'</td>';
+          echo  "<td class='".$result."'>".$result.'</td>';
      }
      echo '</tr>';
 }
 
-for ( $i = 20; $i >= 2; $i -= 2 )
+for ( $i = 2; $i <= 20; $i += 2 )
 {
      echo '<tr>';
      echo '<th>'.($i/2).'-'.($i/2).'</th>';
@@ -80,9 +81,9 @@ for ( $i = 20; $i >= 2; $i -= 2 )
           $dealer = new FakeBlackJackHand( $base );
           $player->deal( $dealer, array(), $hand ); 
           $result = $hand->getResult();
-          if ( $result === null ) $result = 'Stand';
+          if ( $result === null ) $result = 'S';
 
-          echo  "<td class='".$result."'> $base/$i =>".$result.'</td>';
+          echo  "<td class='".$result."'>".$result.'</td>';
      }
      echo '</tr>';
 }

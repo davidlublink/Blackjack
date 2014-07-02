@@ -154,8 +154,16 @@ Class BlackJackHand
 
      private $doubled = false;
 
-     public function double()/*{{{*/
+     public function doubleOrStand()
      {
+          $this->double( false ); 
+     }
+
+     public function double($hit = true)/*{{{*/
+     {
+          if ( !$this->isDoubleAllowed() ) 
+               return $hit ? $this->hit() : null ;  
+
           BlackJackLog::out( BlackJackLog::PLAY, "Player doubled his bet...");
           $card = $this->hit(true);
           if ( count( $this->shown ) === 2 ) 

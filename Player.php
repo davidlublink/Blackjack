@@ -83,13 +83,8 @@ Class BlackJackPlayer implements BlackJackPlayerInterface
                               $me->split($dealerHand, $others);
                               break;
                          case '8' :
-                              // @verify
-                              if ( !in_array( $dealer, array('10', 'J', 'Q','K', 'A' ) ) )
                                    $me->split( $dealerHand, $others );
-                              else
-                                   $me->hit(); 
                               break;
-
                          case 'K' :
                          case 'Q' :
                          case 'J' :
@@ -102,25 +97,24 @@ Class BlackJackPlayer implements BlackJackPlayerInterface
                               $me->split( $dealerHand, $others );
                               break;
                          case '7' :
-                              // @verify : 
                               if ( in_array( $dealer, array( '10', 'J', 'Q', 'K' ) ) ) 
                               {
                                    // stand!!
                                    return ;
                               }
-                              if ( in_array( $dealer, array( '8', '9', '10','J','Q','K', 'A' ) ) ) $me->hit();
+                              if ( in_array( $dealer, array(  '9','A' ) ) ) $me->hit();
                               else $me->split( $dealerHand, $others );
                               break;
                          case '3' :
-                              if ( in_array( $dealer, array( '3', '2', '8', '9', '10','J','Q','K', 'A' ) ) ) $me->hit();
+                              if ( in_array( $dealer, array( '9', '10','J','Q','K', 'A' ) ) ) $me->hit();
                               else $me->split( $dealerHand, $others );
                               break;
                          case '2' :
-                              if ( in_array( $dealer, array( '2', '8', '9', '10','J','Q','K', 'A' ) ) ) $me->hit();
+                              if ( in_array( $dealer, array( '8', '9', '10','J','Q','K', 'A' ) ) ) $me->hit();
                               else $me->split( $dealerHand, $others );
                               break;
                          case '6' :
-                              if ( in_array( $dealer, array( '7', '8', '9', '10','J','Q','K', 'A' ) ) ) $me->hit();
+                              if ( in_array( $dealer, array( '8', '9', '10','J','Q','K', 'A' ) ) ) $me->hit();
                               else $me->split( $dealerHand, $others );
                               break;
 
@@ -130,74 +124,48 @@ Class BlackJackPlayer implements BlackJackPlayerInterface
                               break;
 
                          case '4' :
-                              // @verify : should I split with 4 against 5 or 6 ?
-                              // if ( in_array( $dealer, array( '5', '6' ) ) ) $me->split( $dealerHand, $others ); else 
+                               if ( in_array( $dealer, array( '4', '5', '6' ) ) ) $me->split( $dealerHand, $others ); else 
                                    $me->hit();
                               break;
                     }
                     continue ;
                }
 
-               if ( $value >= 19 && $soft || $value >= 17 && !$soft ) return ;
-
-
                if ( $soft )
                {
-                    if ( $value === 18 && in_array( $dealer, array( '10', 'J','Q','K' ) ) )
-                         $me->hit(); 
-                    if ( $value >= 18 ) return ;
-                    $me->hit();
-
-                    continue ;
-               }
-               // alternative strategy
-               if ( false && $soft )
-               {
-                    if ( $value == 18 )
+                    if ( $value == 19 )
+                    {
+                         if ( in_array( $dealer, array( '6' ) ) )
+                              $me->double();
+                         else
+                              return ; 
+                    }
+                    elseif ( $value >= 19 ) 
+                         return ;
+                    elseif ( $value == 18 )
                     {
                          if ( in_array($dealer, array( '2','7','8') ) ) return ;
 
-                         else if ( in_array( $dealer, array( '9', '10','J','Q','K', 'A' ) ) ) $me->hit();
+                         else if ( in_array( $dealer, array( '9', '10','J','Q','K' ) ) ) $me->hit();
 
                          else if ( in_array( $dealer, array( '3', '4', '5', '6' ) ) )
-                         {
-                              if ( $me->isDoubleAllowed() ) return $me->double();
-                              $me->hit(); 
-                         }
-                         continue ;
+                              $me->double();
+                         else
+                              return ; 
                     }
-
                     elseif ( $value == 17 ) // A & 6 
                     {
-                         if ( in_array( $dealer, array( '2', '7', '8', '9', '10','J','Q','K', 'A' ) ) ) $me->hit(); 
-                         else if ( in_array( $dealer, array( '3', '4', '5', '6' ) ) )
-                         {
-                              if ( $me->isDoubleAllowed() ) return $me->double();
-                              $me->hit(); 
-                         }
-                         continue ;
+                         if ( in_array( $dealer, array( '7', '8', '9', '10','J','Q','K', 'A' ) ) ) $me->hit(); 
+                         else if ( in_array( $dealer, array( '2', '3', '4', '5', '6' ) ) )
+                              $me->double();
                     }
-                    elseif ( $value == 16 || $value === 15 ) // A & 5 , A & 6
+                    elseif ( in_array( $value, array( 13, 14, 15, 16 ) ) )
                     {
                          if ( in_array( $dealer, array( '3', '2', '7', '8', '9', '10','J','Q','K', 'A' ) ) ) $me->hit(); 
                          else if ( in_array( $dealer, array( '4', '5', '6' ) ) )
-                         {
-                              if ( $me->isDoubleAllowed() ) return $me->double();
-                              $me->hit(); 
-                         }
-                         continue ;
+                              $me->double();
                     }
-
-                    elseif ( $value == 14 || $value === 13 ) // A & 3 , A & 2
-                    {
-                         if ( in_array( $dealer, array( '3', '2', '4', '7', '8', '9', '10','J','Q','K', 'A' ) ) ) $me->hit(); 
-                         else if ( in_array( $dealer, array( '5', '6' ) ) )
-                         {
-                              if ( $me->isDoubleAllowed() ) return $me->double();
-                              $me->hit(); 
-                         }
-                         continue ;
-                    }
+                    continue ;
                }
 
                if ( $value >= 17 ) return ;
@@ -215,15 +183,14 @@ Class BlackJackPlayer implements BlackJackPlayerInterface
                     $me->hit(); 
                elseif ( $value === 10 && !in_array($dealer,array( '10','J','Q','K', 'A') ) ) 
                     return $me->double(); 
-               // @verify some charts say I should hit, others say double
-               elseif ( $value === 9 && in_array( $dealer, array( '2' ) ) )
-                    return $me->double(); 
                elseif ( $value === 9 && in_array( $dealer, array( '3', '4', '5', '6' ) ) ) 
                     return $me->double(); 
                elseif ( in_array( $dealer, array('7','8','9','10','J','K','Q','A') ) && $value < 17 ) 
                     $me->hit();
                elseif ( $value === 9 && $dealer === '2' ) 
                     $me->hit(); 
+               elseif ( $value === 8 && in_array($dealer, array( '5', '6' ) )) 
+                    return $me->double(); 
                elseif ( $value <= 8 ) 
                     $me->hit(); 
                else
