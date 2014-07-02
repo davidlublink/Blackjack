@@ -11,15 +11,16 @@ $bj = new BlackJackGame();
 $players = array(); 
 $players[] = new BlackJackPlayer( $start ); 
 
-require_once( 'Players/HiLoOpt1.php' ); $players[] = new BlackJackPlayer_HiLoOpt1( $start );
-require_once( 'Players/HiLoOpt2.php' ); $players[] = new BlackJackPlayer_HiLoOpt2( $start );
+#require_once( 'Players/HiLoOpt1.php' ); $players[] = new BlackJackPlayer_HiLoOpt1( $start );
+#require_once( 'Players/HiLoOpt2.php' ); $players[] = new BlackJackPlayer_HiLoOpt2( $start );
 require_once( 'Players/HiLo.php' );     $players[] = new BlackJackPlayer_HiLo( $start );
-require_once( 'Players/HiLoCount.php' );     $players[] = new BlackJackPlayer_HiLoCount( $start );
+#require_once( 'Players/HiLoCount.php' );     $players[] = new BlackJackPlayer_HiLoCount( $start );
 require_once( 'Players/OmegaII.php' );  $players[] = new BlackJackPlayer_OmegaII( $start );
 require_once( 'Players/Red7.php' );     $players[] = new BlackJackPlayer_Red7( $start );
-require_once( 'Players/Tek.php' );      $players[] = new BlackJackPlayer_Tek( $start );
+#require_once( 'Players/Tek.php' );      $players[] = new BlackJackPlayer_Tek( $start );
 require_once( 'Players/ZenCount.php' ); $players[] = new BlackJackPlayer_ZenCount( $start );
 require_once( 'Players/Martingale.php' ); $players[] = new BlackJackPlayer_Martingale( $start );
+require_once( 'Players/Tek2.php' );      $players[] = new BlackJackPlayer_Tek2( $start );
 
 $max = $start;
 
