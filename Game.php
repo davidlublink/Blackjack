@@ -56,7 +56,10 @@ Class BlackJackGame
           $hands = array(); 
           // first card 
           foreach ( $players as $key => $player )
+          {
                $hands[ $key ] = new BlackJackHand( $players, $bets[$key], $this->deck, $this->deck->draw() );
+               $hands[ $key ]->revealCards(); 
+          }
 
           $dealerHand     = new BlackJackHand( $players, null, $this->deck, $this->deck->draw() );
           $dealerStrategy = new BlackJackDealer() ;
@@ -87,7 +90,6 @@ Class BlackJackGame
           $stands = array();
           foreach ( $players as $k => $player )
           {
-               $hands[$k]->revealcards(); 
                if ( $hands[$k]->isBlackJack() )
                {
                     $hands[$k]->blackjack();
