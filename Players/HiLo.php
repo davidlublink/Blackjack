@@ -53,6 +53,7 @@ Class BlackJackPlayer_HiLo extends BlackJackPlayer
 
      public function wantInsurance( $game, $cost )/*{{{*/
      {
+          // Illustrious 1
           return $this->getTrueCount( $game ) >= 3;
      }/*}}}*/
 
