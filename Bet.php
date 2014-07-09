@@ -43,6 +43,12 @@ Class BlackJackBet
           $this->bet *= 2;
      }/*}}}*/
 
+     public function surrender()/*{{{*/
+     {
+          $this->player->pay( round( $this->bet * 0.05 ) ); 
+          $this->bet = 0; 
+     }/*}}}*/
+
      public function dealerBlackJack( $meBlackJack )/*{{{*/
      {
           $this->payout( $meBlackJack ? 1 : 0 );

@@ -59,11 +59,14 @@ Class BlackJackHand
 
      public function blackJack( )/*{{{*/
      {
+          if ( $this->bet === null ) return ;
           $this->bet->blackjack(); 
      }/*}}}*/
 
      public function hit( $hideHit = false )/*{{{*/
      {
+           if ( $this->surrendered ) return ;
+
           if ( $this->doubled ) return ;
 
           if ( count($this->shown ) > 0 && !$hideHit) 
@@ -79,6 +82,19 @@ Class BlackJackHand
           if ( count($this->shown) > 1 )
                BlackJackLog::out( BlackJackLog::PLAY, array_pop($this->getValue(false)) .": Hand is now ". $this->hidden . " ". implode (' ', $this->shown ) );
           return $d; 
+     }/*}}}*/
+
+     private $surrendered = false;
+     public function surrender( )/*{{{*/
+     {
+          $this->surrendered = true ;
+          $this->bet->surrender ( );
+          $this->bet = null; 
+     }/*}}}*/
+
+     public function isSurrendered()/*{{{*/
+     {
+          return $this->surrendered ; 
      }/*}}}*/
 
      public function revealcards()/*{{{*/
@@ -133,6 +149,8 @@ Class BlackJackHand
 
      public function split( $dealer, $others )/*{{{*/
      {
+          if ( $this->surrendered ) return ;
+
           if ( !$this->isSplitAllowed() ) throw new exception("You can't split now!");
 
           BlackJackLog::out( BlackJackLog::PLAY, "Splitting on ". implode(' ', $this->getCards() ) );
@@ -161,6 +179,7 @@ Class BlackJackHand
 
      public function double($hit = true)/*{{{*/
      {
+          if ( $this->surrendered ) return ;
           if ( !$this->isDoubleAllowed() ) 
                return $hit ? $this->hit() : null ;  
 
