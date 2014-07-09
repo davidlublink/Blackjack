@@ -73,14 +73,15 @@ Class BlackJackHand
                BlackJackLog::out( BlackJackLog::PLAY, "Hit..." );
 
           $this->shown[] = $d = $this->deck->draw(); 
-          if ( $this->show )
-          {
-               foreach ( $this->players as $player )
-                    $player->revealcard( $d );
-          }
 
-          if ( count($this->shown) > 1 )
+          foreach ( $this->players as $player )
+               $player->revealcard( $d );
+
+          if ( $this->show )
                BlackJackLog::out( BlackJackLog::PLAY, array_pop($this->getValue(false)) .": Hand is now ". $this->hidden . " ". implode (' ', $this->shown ) );
+          else
+               BlackJackLog::out( BlackJackLog::PLAY, array_pop($this->getValue(false)) .": Hand is now X ". implode (' ', $this->shown ) );
+
           return $d; 
      }/*}}}*/
 
@@ -101,11 +102,7 @@ Class BlackJackHand
      {
           $this->show = true ;
           foreach ( $this->players as $player )
-          {
                $player->revealcard( $this->hidden );
-               foreach ( $this->shown as $card )
-                    $player->revealcard( $card );
-          }
      }/*}}}*/
 
      public function getShown() /*{{{*/
@@ -172,10 +169,10 @@ Class BlackJackHand
 
      private $doubled = false;
 
-     public function doubleOrStand()
+     public function doubleOrStand()/*{{{*/
      {
           $this->double( false ); 
-     }
+     }/*}}}*/
 
      public function double($hit = true)/*{{{*/
      {
@@ -195,7 +192,7 @@ Class BlackJackHand
           return $card; 
      }/*}}}*/
 
-     public function isDoubleAllowed() 
+     public function isDoubleAllowed() /*{{{*/
      {
           if ( count($this->shown) !== 1 ) return false; 
 
@@ -203,7 +200,7 @@ Class BlackJackHand
                BlackJackLog::out( BlackJackLog::PLAY, "User wants to double, but can't because we don't have enough money!" );
           else
                return true ;
-     } 
+     } /*}}}*/
 
      public function isSplitAllowed()/*{{{*/
      {
