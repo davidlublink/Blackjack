@@ -15,7 +15,7 @@ Class BlackJackPlayer_HiLo extends BlackJackPlayer
           $this->game = $game ;
 //          if ( $this->count < -5 ) return 0 ;//  throw new exception("Player left the table because of bad count!");
 
-          $decks = $game->getCardsRemaining() / 54 ;
+          $decks = $game->getCardsRemaining() / 52 ;
 
           $bet = max ( 5, round( 10 + $this->getTrueCount($game) * 5 ) ) ;
 
@@ -51,7 +51,7 @@ Class BlackJackPlayer_HiLo extends BlackJackPlayer
 
      protected function getTrueCount($game)/*{{{*/
      {
-          return $this->count / ( $game->getCardsRemaining() / 54 ) ;
+          return $this->count / ( $game->getCardsRemaining() / 52 ) ;
      }/*}}}*/
 
      public function wantInsurance( $game, $cost )/*{{{*/
@@ -88,7 +88,7 @@ Class BlackJackPlayer_HiLo extends BlackJackPlayer
                // Illustrious 4
                if ( $count >= 5 && $value === 20 && $me->isSplitAllowed() && in_array( $dealer, array('5') ) )
                {
-                    $me->split($dealer, $others); 
+                    $me->split($dealerHand, $others); 
                     return ;
                }
 
@@ -200,5 +200,10 @@ Class BlackJackPlayer_HiLo extends BlackJackPlayer
 
           return parent::deal( $dealerHand, $others, $me );
      } /*}}}*/ 
+
+     public function skipRound($game = null)
+     {
+          return $this->getTrueCount($game) < 1 ; 
+     }
 
 }

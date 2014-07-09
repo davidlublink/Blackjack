@@ -4,7 +4,7 @@
 require_once('Game.php');
 require_once('Player.php');
 
-$start = 100;
+$start = array_key_exists( 2, $argv ) ? $argv[2]  : 100 ;
 
 $bj = new BlackJackGame();
 
@@ -44,7 +44,7 @@ try
                     $rounds[$k] = $hands;
                     unset($players[$k] );
                }
-               elseif ( !$player->leaveGame() )
+               elseif ( !$player->skipRound($bj) ) 
                {
                     //BlackJackLog::out( BlackJackLog::MAIN, "Player $k is leaving because of a low count."); 
                     $thisRound[] = $player ;

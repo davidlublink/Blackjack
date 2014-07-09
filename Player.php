@@ -57,7 +57,7 @@ Class BlackJackPlayer implements BlackJackPlayerInterface
           BlackJackLog::out( BlackJackLog::ROUND, "Push" );
      }/*}}}*/
 
-     public function leaveGame() { return false; } 
+     public function skipRound() { return false; } 
 
      public function deal( BlackJackHand $dealerHand, array $others, BlackJackHand $me ) /*{{{*/
      {
