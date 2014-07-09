@@ -99,12 +99,12 @@ Class BlackJackGame
                     BlackJackLog::out( BlackJackLog::ROUND, "Player hand is ". implode(' ', $hands[$k]->getCards())." against dealer ". ($dealerHand->getShown()) );
                     $player->deal( $dealerHand, $hands, $hands[$k] ); 
                     if ( $hands[$k]->isSurrendered() )
+                         BlackJackLog::out( BlackJackLog::ROUND, "Player surrendered!"); 
+                    else
                     {
                          BlackJackLog::out( BlackJackLog::ROUND, "Player stands!" );
                          $stands[$k] = $hands[$k]; 
                     }
-                    else
-                         BlackJackLog::out( BlackJackLog::ROUND, "Player surrendered!"); 
                }
                catch( BlackJackBust $e )
                {
