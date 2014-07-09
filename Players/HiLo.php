@@ -121,12 +121,14 @@ Class BlackJackPlayer_HiLo extends BlackJackPlayer
                // Illustrious 9
                if ( $count >= 1 && $value === 11 && in_array( $dealer, array('A') ) )
                {
+                    $me->double(); // /r/Moogra2u said should should be double not stand
                     return ;
                }
 
                // Illustrious 10
                if ( $count >= 1 && $value === 9 && in_array( $dealer, array('2') ) )
                {
+                    $me->double(); // /r/Moogra2u said should should be double not stand
                     return ;
                }
 
@@ -203,6 +205,7 @@ Class BlackJackPlayer_HiLo extends BlackJackPlayer
 
      public function skipRound($game = null)
      {
+          return false ;
           return $this->getTrueCount($game) < 1 ; 
      }
 
