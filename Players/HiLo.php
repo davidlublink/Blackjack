@@ -13,9 +13,6 @@ Class BlackJackPlayer_HiLo extends BlackJackPlayer
      public function getBet( BlackJackGame $game ) /*{{{*/
      {
           $this->game = $game ;
-//          if ( $this->count < -5 ) return 0 ;//  throw new exception("Player left the table because of bad count!");
-
-          $decks = $game->getCardsRemaining() / 52 ;
 
           $bet = max ( 5, round( 10 + $this->getTrueCount($game) * 5 ) ) ;
 
