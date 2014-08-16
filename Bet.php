@@ -6,6 +6,9 @@ Class BlackJackBet
      private $bet ;
      private $game ;
 
+     private $min ;
+     private $max;
+
      public function __construct( $game, $player, $bet = null )/*{{{*/
      {
           $this->game = $game ;
@@ -14,6 +17,7 @@ Class BlackJackBet
           {
                $bet = min( $game->getMaxBet(), max( $game->getMinBet(), $player->getBet($game) ) ); 
                $bet = min ( $bet, $player->getMoney() ) ;
+               $bet = round( $bet );
           }
 
           if ( $bet > $player->getMoney() ) throw new exception("Player can't afford this round!");

@@ -7,7 +7,7 @@ require_once( 'HiLo.php' );
 Class BlackJackPlayer_HiLoOpt1 extends BlackJackPlayer_HiLo
 {
 
-     private static $countingSystem = array(/*{{{*/
+     public static $countingSystem = array(/*{{{*/
                '2' => 0 ,
                '3' => 1 ,
                '4' => 1 ,

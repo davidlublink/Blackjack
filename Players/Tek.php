@@ -6,7 +6,7 @@ require_once( 'HiLo.php' );
 Class BlackJackPlayer_Tek extends BlackJackPlayer_HiLo
 {
 
-     private static $countingSystem = array(/*{{{*/
+     public static $countingSystem = array(/*{{{*/
                '2' => 1 ,
                '3' => 1 ,
                '4' => 1 ,
@@ -29,17 +29,17 @@ Class BlackJackPlayer_Tek extends BlackJackPlayer_HiLo
 
      public function getBet( BlackJackGame $game ) /*{{{*/
      {
-          $bet = max ( 5, 10 + $this->bet );
+          $bet = max ( 5, 5 * $this->bet );
           BlackJackLog::out( BlackJackLog::BET, "I am betting $bet" );
           return $bet ;
      }/*}}}*/
 
      private $bet = 0;
 
-     const WIN       = -2 ;
-     const BLACKJACK = -5 ;
-     const LOSE      = 5  ;
-     const BUST      = 6  ;
+     const WIN       = -1 ;
+     const BLACKJACK = -2 ;
+     const LOSE      = 1  ;
+     const BUST      = 1  ;
 
      public function win( )/*{{{*/
      {
@@ -69,4 +69,31 @@ Class BlackJackPlayer_Tek extends BlackJackPlayer_HiLo
      {
           parent::push();
      }/*}}}*/
+
+     public function deal( BlackJackHand $dealerHand, array $others, BlackJackHand $me ) /*{{{*/
+     {
+          if ( $this->game === null ) return parent::deal($dealerHand, $others, $me ); 
+
+          $dealer = $dealerHand->getShown();
+
+          $i = 3;
+
+          $count = $this->getTrueCount($this->game) ;
+
+          // Illustrious 4
+          if ( $value === 20 && $me->isSplitAllowed() && in_array( $dealer, array('5', '6' ) ) )
+          {
+               $me->split($dealerHand, $others); 
+               return ;
+          }
+
+          // Illustrious 5
+          if ( $value <= 11 && $me->isDoubleAllowed() && in_array( $dealer, array('6','5') ) )
+          {
+               $me->double();
+               return ;
+          }
+          return parent::deal($dealerHand,$others,$me );
+     } /*}}}*/
+ 
 }
