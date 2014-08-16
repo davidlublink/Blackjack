@@ -14,6 +14,7 @@ Class BlackJackDealer implements BlackJackPlayerInterface
           {
                list( $soft, $value ) = $dealer->getValue(); 
 
+               if ( $soft && $value === 17 ) $dealer->hit();
                if ( $value >= 17 ) return ;
 
                $dealer->hit(); 

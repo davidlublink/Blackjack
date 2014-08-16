@@ -14,7 +14,10 @@ Class BlackJackPlayer_HiLo extends BlackJackPlayer
      {
           $this->game = $game ;
 
-          $bet = max ( 5, round( 10 + $this->getTrueCount($game) * 5 ) ) ;
+          $count = abs( $this->count );
+          $bet = max ( 5,  ( abs( $this->count ) ) ) ;
+
+          if ( abs($count) > 10 ) return 100 ;
 
           BlackJackLog::out( BlackJackLog::BET, "I am betting $bet" );
           return $bet ;
@@ -203,8 +206,7 @@ Class BlackJackPlayer_HiLo extends BlackJackPlayer
 
      public function skipRound($game = null)
      {
-          return false ;
-          return $this->getTrueCount($game) < 1 ; 
+          return abs($this->count) < 5; 
      }
 
 }
