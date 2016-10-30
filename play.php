@@ -4,27 +4,28 @@
 require_once('Game.php');
 require_once('Player.php');
 
-$start = array_key_exists( 2, $argv ) ? $argv[2]  : 500 ;
+$start = array_key_exists( 2, $argv ) ? $argv[2]  : 50000 ;
 
 $bj = new BlackJackGame();
 
 $players = array(); 
 $players[] = new BlackJackPlayer( $start ); 
 
-require_once( 'Players/HiLoOpt1.php' ); $players[] = new BlackJackPlayer_HiLoOpt1( $start );
-require_once( 'Players/HiLoOpt2.php' ); $players[] = new BlackJackPlayer_HiLoOpt2( $start );
+#require_once( 'Players/HiLoOpt1.php' ); $players[] = new BlackJackPlayer_HiLoOpt1( $start );
+#require_once( 'Players/HiLoOpt2.php' ); $players[] = new BlackJackPlayer_HiLoOpt2( $start );
 require_once( 'Players/HiLo.php' );     $players[] = new BlackJackPlayer_HiLo( $start );
 require_once( 'Players/HiLoCount.php' );     $players[] = new BlackJackPlayer_HiLoCount( $start );
-require_once( 'Players/OmegaII.php' );  $players[] = new BlackJackPlayer_OmegaII( $start );
-require_once( 'Players/Red7.php' );     $players[] = new BlackJackPlayer_Red7( $start );
-require_once( 'Players/Tek.php' );      $players[] = new BlackJackPlayer_Tek( $start );
-require_once( 'Players/ZenCount.php' ); $players[] = new BlackJackPlayer_ZenCount( $start );
-require_once( 'Players/Martingale.php' ); $players[] = new BlackJackPlayer_Martingale( $start );
+#require_once( 'Players/OmegaII.php' );  $players[] = new BlackJackPlayer_OmegaII( $start );
+#require_once( 'Players/Red7.php' );     $players[] = new BlackJackPlayer_Red7( $start );
+#require_once( 'Players/Tek.php' );      $players[] = new BlackJackPlayer_Tek( $start );
+#require_once( 'Players/ZenCount.php' ); $players[] = new BlackJackPlayer_ZenCount( $start );
+#require_once( 'Players/Martingale.php' ); $players[] = new BlackJackPlayer_Martingale( $start );
 require_once( 'Players/Tek2.php' );      $players[] = new BlackJackPlayer_Tek2( $start );
+require_once( 'Players/SomeLady.php' );      $players[] = new BlackJackPlayer_SomeLady( $start );
 
 $max = $start;
 
-$roundsRemaining = array_key_exists(1, $argv) ? $argv[1] : 10000;
+$roundsRemaining = array_key_exists(1, $argv) ? $argv[1] : 100000;
 $hands = 0;
 
 $origPlayers = $players ;
@@ -39,7 +40,7 @@ try
           {
                if ( !$player->hasMoney( $bj ) )
                {
-                    BlackJackLog::out( BlackJackLog::MAIN, "Player $k is out of money, left the table" );
+                    BlackJackLog::out( BlackJackLog::MAIN, "Player $k (".get_class( $player ) .") is out of money with $roundsRemaining rounds remaining, left the table" );
 
                     $rounds[$k] = $hands;
                     unset($players[$k] );
@@ -70,6 +71,33 @@ catch(exception $e )
      BlackJackLog::out( BlackJackLog::MAIN, $e->getMessage() ); 
 }
 
+BlackJackLog::out( BlackJackLog::MAIN, '');
+BlackJackLog::out( BlackJackLog::MAIN, '');
+BlackJackLog::out( BlackJackLog::MAIN, '');
+
+BlackJackLog::out( BlackJackLog::MAIN, 
+
+               str_pad( "Player", 35, ' ') 
+               ." "
+               .str_pad( "Peak", 10, ' ')
+               ." "
+
+               . str_pad( "Hands", 10, ' ') 
+               . " "
+               . str_pad( 'Result' ,7,' ' ) 
+               . " "
+               .str_pad( "Diff", 7, ' ' )
+               . " "
+               . str_pad( "Balance", 7, ' ' ) 
+               );
+
+usort( $origPlayers, 'playersort') ;
+
+function playerSort( $b, $a ) 
+{
+     return $a->getMoney() - $b->getMoney();
+}
+
 foreach ( $origPlayers as $k => $player )
 {
      $gain = $player->getMoney() - $start ;
@@ -79,10 +107,19 @@ foreach ( $origPlayers as $k => $player )
      else
           $hands = 0;
 
-     if ( $gain > 0 )
-          BlackJackLog::out( '========> '. BlackJackLog::MAIN, get_class($player)." : Player walked away with {$player->getMoney()}, that's a gain of {$gain} but peaked at {$player->getPeak()} with $hands played") ;
-     else
-          BlackJackLog::out( BlackJackLog::MAIN, get_class($player)." : Player walked away with {$player->getMoney()}, that's a loss of ".abs($gain)." but peaked at {$player->getPeak()} with $hands played") ;
+     BlackJackLog::out( BlackJackLog::MAIN, str_pad(get_class($player), 35 , ' ') 
+               ." "
+               .str_pad( $player->getPeak(), 10, ' ')
+               . " "
+               . str_pad($hands, 10, ' ') 
+               . " "
+               . str_pad( $gain > 0  ? '+' : '-' ,7,' ' ) 
+               . " "
+               .str_pad( abs($gain), 7, ' ' )
+               ." "
+               . str_pad( $player->getMoney(),7,' ' ) 
+               );
+
 }
 
 

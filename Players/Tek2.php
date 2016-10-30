@@ -1,5 +1,7 @@
 <?php
 
+require_once('HiLo.php');
+
 Class BlackJackPlayer_Tek2 extends BlackJackPlayer_HiLo
 {
 
@@ -10,6 +12,7 @@ Class BlackJackPlayer_Tek2 extends BlackJackPlayer_HiLo
 
      public function getBet( BlackJackGame $game ) /*{{{*/
      {
+          $this->losecount = max ( -20, min ( 20, $this->losecount ) ) ;
           if ( $this->losecount <= 1 )
                return 10 * $this->losecount * 10  ; 
           return 10 * $this->losecount * 5 ;
@@ -25,10 +28,10 @@ Class BlackJackPlayer_Tek2 extends BlackJackPlayer_HiLo
 
      private $losecount = 0;
 
-     const WIN       = -3;
-     const BLACKJACK = -4;
-     const LOSE      = 2 ;
-     const BUST      = 2;
+     const WIN       = -2;
+     const BLACKJACK = -3;
+     const LOSE      = 1 ;
+     const BUST      = 1;
      const PUSH      = 0; 
 
      public function win( )/*{{{*/
