@@ -96,7 +96,7 @@ Class BlackJackPlayer_HiLo extends BlackJackPlayer
                // Illustrious 5
                if ( $count >= 4 && $value === 20 && $me->isSplitAllowed() && in_array( $dealer, array('6') ) )
                {
-                    $me->double();
+                    $me->split( $dealerHand, $others) ;
                     return ;
                }
 
