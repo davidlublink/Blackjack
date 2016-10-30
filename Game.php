@@ -110,6 +110,7 @@ Class BlackJackGame
                }
                catch( BlackJackBust $e )
                {
+                    $player->bust();
                     BlackJackLog::out( BlackJackLog::ROUND, "Player bust!" );
                }
           }
