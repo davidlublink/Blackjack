@@ -54,7 +54,7 @@ Class BlackJackDeck
 
           $card = array_shift( $this->deck );
 
-          BlackJackLog::out( BlackJackLog::DECK, "Drew card $card" ) ;
+          //BlackJackLog::out( BlackJackLog::DECK, "Drew card $card" ) ;
 
           return $card;
      }/*}}}*/
