@@ -46,7 +46,7 @@ Class BlackJackGame
                     $player->shuffle() ;
           }
 
-          BlackJackLog::out( BlackJackLog::ROUND, "============". 'Round has started' ." ==========") ;
+          BlackJackLog::out( BlackJackLog::SECTION, "\n\n============". 'Round has started' ." ==========") ;
 
           $bets = array();
 
@@ -136,7 +136,7 @@ Class BlackJackGame
                     $hand->dealer( $value ); 
           }
 
-          BlackJackLog::out( BlackJackLog::ROUND,  "========== " . 'Round has finished' . " ==========" ) ;
+          BlackJackLog::out( BlackJackLog::SECTION,  "========== " . 'Round has finished' . " ==========" ) ;
           
 
      }/*}}}*/

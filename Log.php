@@ -11,9 +11,14 @@ class BlackJackLog
      const DEALER = 'Dealer';
      const PLAY = 'Play';
 
+     const SECTION = '';
+
      public static function out( $level, $msg )
      {
-          if ( $level == self::MAIN )
+//          if ( $level == self::MAIN )
+          if ( $level === '' )
+               echo "$msg\n";
+          else
                echo "$level: $msg \n";
      }
 }
