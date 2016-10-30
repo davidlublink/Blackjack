@@ -206,6 +206,7 @@ Class BlackJackPlayer_HiLo extends BlackJackPlayer
 
      public function skipRound($game = null)
      {
+          return false;
           return abs($this->count) < 5; 
      }
 

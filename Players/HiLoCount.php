@@ -6,7 +6,7 @@ require_once( 'HiLo.php' );
 Class BlackJackPlayer_HiLoCount extends BlackJackPlayer_HiLo
 {
 
-     public function getTrueCount() { return $this->count ; } 
+     public function getTrueCount($game) { return $this->count ; } 
 
 
 }

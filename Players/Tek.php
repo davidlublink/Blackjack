@@ -72,7 +72,7 @@ Class BlackJackPlayer_Tek extends BlackJackPlayer_HiLo
 
      public function deal( BlackJackHand $dealerHand, array $others, BlackJackHand $me ) /*{{{*/
      {
-          if ( $this->game === null ) return parent::deal($dealerHand, $others, $me ); 
+          if ( !isset( $this->game ) || $this->game === null ) return parent::deal($dealerHand, $others, $me ); 
 
           $dealer = $dealerHand->getShown();
 

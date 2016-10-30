@@ -4,7 +4,7 @@
 require_once('Game.php');
 require_once('Player.php');
 
-$start = array_key_exists( 2, $argv ) ? $argv[2]  : 100000 ;
+$start = array_key_exists( 2, $argv ) ? $argv[2]  : 100 ;
 
 $bj = new BlackJackGame();
 
@@ -24,7 +24,7 @@ require_once( 'Players/Tek2.php' );      $players[] = new BlackJackPlayer_Tek2( 
 
 $max = $start;
 
-$roundsRemaining = array_key_exists(1, $argv) ? $argv[1] : 1;
+$roundsRemaining = array_key_exists(1, $argv) ? $argv[1] : 10000;
 $hands = 0;
 
 $origPlayers = $players ;
@@ -46,13 +46,15 @@ try
                }
                elseif ( !$player->skipRound($bj) ) 
                {
-                    //BlackJackLog::out( BlackJackLog::MAIN, "Player $k is leaving because of a low count."); 
+                    //BlackJackLog::out( BlackJackLog::MAIN, "Player $k is playing.");
                     $thisRound[] = $player ;
                     if ( !array_key_exists( $k, $rounds) ) $rounds[$k] = 0 ;
                     if ( $roundsRemaining % 1000 === 0 )
                          BlackJackLog::out( BlackJackLog::MAIN, get_class($player)." : Player has {$player->getMoney()} after {$rounds[$k]} played") ;
                     $rounds[$k]++;
                }
+               Else
+                    BlackJackLog::out( BlackJackLog::MAIN, "Player $k is skipping out because of a low count."); 
           }
 
           if ( count( $players ) === 0 ) throw new exception("Everyone is bankrupt!"); 
@@ -72,7 +74,10 @@ foreach ( $origPlayers as $k => $player )
 {
      $gain = $player->getMoney() - $start ;
 
-     $hands = $rounds[$k];
+     if ( array_key_exists( $k, $rounds ) )
+          $hands = $rounds[$k];
+     else
+          $hands = 0;
 
      if ( $gain > 0 )
           BlackJackLog::out( BlackJackLog::MAIN, get_class($player)." : Player walked away with {$player->getMoney()}, that's a gain of {$gain} but peaked at {$player->getPeak()} with $hands played") ;

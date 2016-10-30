@@ -21,7 +21,7 @@ Class BlackJackPlayer_Tek2 extends BlackJackPlayer_HiLo
                return 50 ;
      }/*}}}*/
 
-     public function getTrueCount() { return 0 ; }
+     public function getTrueCount($game) { return 0 ; }
 
      private $losecount = 0;
 
