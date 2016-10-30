@@ -21,6 +21,12 @@ Class BlackJackDeck
                $this->deck = array_merge( $this->deck, self::$sdeck ); 
 
           $this->shuffle();
+
+          // Sample stacked decks
+          // $this->deck = array( 'A', 'K', 'K', '6', '2', '5', '9', '10', 'J' ); // user black jack
+          // $this->deck = array( '5', '5', 'K', 'K', 'K', 'K', '9', '10', 'J' ); // user bust
+          // $this->deck = array( 'K', 'K', 'K', 'K', 'K', 'K', '9', '10', 'J' ); // push
+          // $this->deck = array( '9', 'K', 'K', 'K', 'K', 'K', '9', '10', 'J' ); // user loses
 	}/*}}}*/
 
      private function shuffle()/*{{{*/
