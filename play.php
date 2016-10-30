@@ -4,7 +4,7 @@
 require_once('Game.php');
 require_once('Player.php');
 
-$start = array_key_exists( 2, $argv ) ? $argv[2]  : 50000 ;
+$start = array_key_exists( 2, $argv ) ? $argv[2]  : 100 ;
 
 $bj = new BlackJackGame();
 
@@ -25,7 +25,7 @@ require_once( 'Players/SomeLady.php' );      $players[] = new BlackJackPlayer_So
 
 $max = $start;
 
-$roundsRemaining = array_key_exists(1, $argv) ? $argv[1] : 100000;
+$original = $roundsRemaining = array_key_exists(1, $argv) ? $argv[1] : 100000;
 $hands = 0;
 
 $origPlayers = $players ;
@@ -42,7 +42,6 @@ try
                {
                     BlackJackLog::out( BlackJackLog::MAIN, "Player $k (".get_class( $player ) .") is out of money with $roundsRemaining rounds remaining, left the table" );
 
-                    $rounds[$k] = $hands;
                     unset($players[$k] );
                }
                elseif ( !$player->skipRound($bj) ) 
@@ -50,6 +49,7 @@ try
                     //BlackJackLog::out( BlackJackLog::MAIN, "Player $k is playing.");
                     $thisRound[] = $player ;
                     if ( !array_key_exists( $k, $rounds) ) $rounds[$k] = 0 ;
+                    $rounds[$k]++;
                     if ( $roundsRemaining % 1000 === 0 )
                          BlackJackLog::out( BlackJackLog::MAIN, get_class($player)." : Player has {$player->getMoney()} after {$rounds[$k]} played") ;
                     $rounds[$k]++;
@@ -113,7 +113,7 @@ foreach ( $origPlayers as $k => $player )
                . " "
                . str_pad($hands, 10, ' ') 
                . " "
-               . str_pad( $gain > 0  ? '+' : '-' ,7,' ' ) 
+               . str_pad( $gain > 0  ? 'Win' : 'Lose' ,7,' ' ) 
                . " "
                .str_pad( abs($gain), 7, ' ' )
                ." "
