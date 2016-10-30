@@ -78,9 +78,9 @@ Class BlackJackHand
                $player->revealcard( $d );
 
           if ( $this->show )
-               BlackJackLog::out( BlackJackLog::PLAY, $this->getValue(false)[1] .": Hand is now ". $this->hidden . " ". implode (' ', $this->shown ) );
+               BlackJackLog::out( BlackJackLog::PLAY, "Hand is now ". $this->hidden . " ". implode (' ', $this->shown )  . ' => '. $this->getValue(false)[1]  );
           else
-               BlackJackLog::out( BlackJackLog::PLAY, $this->getValue(false)[1] .": Hand is now X ". implode (' ', $this->shown ) );
+               BlackJackLog::out( BlackJackLog::PLAY, "Hand is now X ". implode (' ', $this->shown ) ); 
 
           return $d; 
      }/*}}}*/
@@ -107,7 +107,7 @@ Class BlackJackHand
 
      public function getShown() /*{{{*/
      {
-          return $this->hidden ;
+          return $this->shown[0];
      }/*}}}*/
 
      public function getValue( $exceptOnBust = true )/*{{{*/
