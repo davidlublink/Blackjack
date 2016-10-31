@@ -12,6 +12,7 @@ Class BlackJackPlayer_HiLo extends BlackJackPlayer
 
      public function getBet( BlackJackGame $game ) /*{{{*/
      {
+          return 5;
           $this->game = $game ;
 
           $count = abs( $this->count );
