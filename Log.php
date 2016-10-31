@@ -15,10 +15,13 @@ class BlackJackLog
 
      public static function out( $level, $msg )
      {
-//          if ( $level == self::MAIN )
-          if ( $level === '' )
-               echo "$msg\n";
-          else
-               echo "$level: $msg \n";
+          syslog(LOG_DEBUG, "$level: $msg"); 
+          if ( $level == self::MAIN ) 
+          {
+               if ( $level === '' )
+                    echo "$msg\n";
+               else
+                    echo "$level: $msg \n";
+          }
      }
 }

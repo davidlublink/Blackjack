@@ -36,7 +36,7 @@ Class BlackJackGame
           return $this->deck->getCardsRemaining(); 
      }/*}}}*/
 
-     public function deal( $players )/*{{{*/
+     public function deal( $handCount, $players )/*{{{*/
      {
           if ( $this->deck->getCardsRemaining() < $this->MINCARDS ) 
           {
@@ -46,7 +46,7 @@ Class BlackJackGame
                     $player->shuffle() ;
           }
 
-          BlackJackLog::out( BlackJackLog::SECTION, "\n\n============". 'Round has started' ." ==========") ;
+          BlackJackLog::out( BlackJackLog::SECTION, "\n\n============ Round $handCount has started ==========") ;
 
           $bets = array();
 
@@ -137,7 +137,7 @@ Class BlackJackGame
                     $hand->dealer( $value ); 
           }
 
-          BlackJackLog::out( BlackJackLog::SECTION,  "========== " . 'Round has finished' . " ==========" ) ;
+          BlackJackLog::out( BlackJackLog::SECTION,  "========== Round $handCount has finished ==========" ) ;
           
 
      }/*}}}*/
