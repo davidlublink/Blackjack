@@ -2,11 +2,11 @@
 
 require_once('HiLo.php');
 
-// slightly increase bet on each win
+//slightly increase bet on each lose
 
-Class BlackJackPlayer_Tek3 extends BlackJackPlayer
+Class BlackJackPlayer_Tek4 extends BlackJackPlayer
 {
-     private $win = 0;
+     private $lose = 0;
 
      public function shuffle()/*{{{*/
      {
@@ -14,32 +14,32 @@ Class BlackJackPlayer_Tek3 extends BlackJackPlayer
 
      public function getBet( BlackJackGame $game ) /*{{{*/
      {
-          return 5 + min( 95, $this->win * 3 ) ;
+          return 5 + min( 95, $this->lose * 3 ) ;
      }/*}}}*/
 
      public function getTrueCount($game) { return 0 ; }
 
      public function win( )/*{{{*/
      {
-          $this->win++;
+          $this->lose = 0;
           parent::win();
      }/*}}}*/
 
      public function blackjack( )/*{{{*/
      {
-          $this->win++;
+          $this->lose = 0;
           parent::blackjack();
      }/*}}}*/
 
      public function lose( )/*{{{*/
      {
-          $this->win = 0 ;
+          $this->lose++;
           parent::lose();
      }/*}}}*/
 
      public function bust( )/*{{{*/
      {
-          $this->win = 0;
+          $this->lose++;
           parent::bust();
      }/*}}}*/
 
