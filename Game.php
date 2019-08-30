@@ -18,7 +18,9 @@ Class BlackJackGame
 
      private $minBet = 5; 
 
-     private $MINCARDS = 52; 
+     private $MINCARDS = 10; 
+
+     const DECKS = 1;
 
      public function getMaxBet() { return $this->maxBet ; } 
 
@@ -26,7 +28,7 @@ Class BlackJackGame
 
      public function __construct()/*{{{*/
      {
-          $this->deck = new BlackJackDeck();
+          $this->deck = new BlackJackDeck( self::DECKS );
      }/*}}}*/
 
      private $dealersCards = array();

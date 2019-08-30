@@ -8,15 +8,16 @@ Class BlackJackDeck
 
 	private $deck = array();
 
-     private $decks = 8;
+     private $decks;
 
      public static function getBase()/*{{{*/
      {
           return self::$sdeck ;
      }/*}}}*/
 
-	public function __construct()/*{{{*/
+	public function __construct( $decks = 8 )/*{{{*/
 	{
+          $this->decks = $decks; 
           for ( $i = 0; $i < $this->decks * 4; $i++ )
                $this->deck = array_merge( $this->deck, self::$sdeck ); 
 
