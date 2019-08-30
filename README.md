@@ -22,6 +22,8 @@ But I don't care, it's still fun to try out new strategies.
 Known issues
 =========
 
+* There may be an issue with my player implementations because even on a single deck, the card counters always do worse than the reference blackjack player
+
 Notes 
 =========
 This software has no user interface. If you don't know how PHP works, you probably won't be able to do anything useful with this software. If you do understand PHP, you might be able to do something mildly useful.
