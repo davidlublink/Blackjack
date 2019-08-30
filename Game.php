@@ -18,7 +18,7 @@ Class BlackJackGame
 
      private $minBet = 5; 
 
-     private $MINCARDS = 10; 
+     private $MINCARDS = 20; 
 
      const DECKS = 1;
 

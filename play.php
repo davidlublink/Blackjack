@@ -5,7 +5,7 @@ require_once('Game.php');
 require_once('Player.php');
 require_once('CSV.php');
 
-$start = array_key_exists( 2, $argv ) ? $argv[2]  : 100 ;
+$start = array_key_exists( 2, $argv ) ? $argv[2]  : 1000 ;
 
 $bj = new BlackJackGame();
 
@@ -14,7 +14,8 @@ $players[] = new BlackJackPlayer( $start );
 
 #require_once( 'Players/HiLoOpt1.php' ); $players[] = new BlackJackPlayer_HiLoOpt1( $start );
 #require_once( 'Players/HiLoOpt2.php' ); $players[] = new BlackJackPlayer_HiLoOpt2( $start );
-require_once( 'Players/HiLo.php' );     $players[] = new BlackJackPlayer_HiLo( $start );
+#require_once( 'Players/HiLo.php' );     $players[] = new BlackJackPlayer_HiLo( $start );
+#require_once( 'Players/HiLo.php' );     $players[] = new BlackJackPlayer_HiLo( $start * 10 );
 #require_once( 'Players/HiLoCount.php' );     $players[] = new BlackJackPlayer_HiLoCount( $start );
 #require_once( 'Players/OmegaII.php' );  $players[] = new BlackJackPlayer_OmegaII( $start );
 #require_once( 'Players/Red7.php' );     $players[] = new BlackJackPlayer_Red7( $start );
@@ -22,7 +23,7 @@ require_once( 'Players/HiLo.php' );     $players[] = new BlackJackPlayer_HiLo( $
 #require_once( 'Players/ZenCount.php' ); $players[] = new BlackJackPlayer_ZenCount( $start );
 #require_once( 'Players/Martingale.php' ); $players[] = new BlackJackPlayer_Martingale( $start );
 #require_once( 'Players/Tek2.php' );      $players[] = new BlackJackPlayer_Tek2( $start );
-#require_once( 'Players/SomeLady.php' );      $players[] = new BlackJackPlayer_SomeLady( $start );
+require_once( 'Players/SomeLady.php' );      $players[] = new BlackJackPlayer_SomeLady( $start );
 #require_once( 'Players/Tek3.php' );      $players[] = new BlackJackPlayer_Tek3( $start );
 #require_once( 'Players/Tek4.php' );      $players[] = new BlackJackPlayer_Tek4( $start );
 
